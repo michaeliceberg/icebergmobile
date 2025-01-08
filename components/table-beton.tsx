@@ -12,7 +12,9 @@ import {
 
 import { ReplaceBeton, ReplaceDate } from "./table-weights"
 import { RecipeDialog } from "./dialog-recipe"
-import { getExpensesBid, getRecipe, updateExpensesBid, uploadExpensesBid } from "@/db/queries"
+import { getExpensesBid, getRecipe } from "@/db/queries"
+import { updateExpensesBid } from "@/actions/update-expenses-bid"
+import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
   
 
   type Props = {

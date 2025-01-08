@@ -1,5 +1,6 @@
 'use client'
 
+import { updateRecipeInExpenses } from "@/actions/update-recipe-exp"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -12,7 +13,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { updateRecipeInExpenses } from "@/db/queries"
+// import { updateRecipeInExpenses } from "@/db/queries"
 import { startTransition, useState } from "react"
 
 type Props = {
