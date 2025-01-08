@@ -7,7 +7,7 @@ export default {
 	out: './drizzle',
 	dbCredentials: {
 		// connectionString: process.env.DATABASE_URL!,
-		url: process.env.DATABASE_URL!,
+		url: process.env.NEXT_PUBLIC_DATABASE_URL!,
 	},
 } satisfies Config
 // satisfies Config

@@ -29,6 +29,7 @@ export const ReplaceBid = (Bid: string) => {
 export const ReplaceDate = (someDate: string) => {
     const splitted = someDate.split(" ")
 
+    
     const splittedTime = splitted[1].split(":")
 
     const rearrange = splittedTime[0] + ":" + splittedTime[1] + " " +splitted[0]
@@ -51,7 +52,10 @@ export const ReplaceBeton = (beton: string) => {
                 .replace('покп№115','')
                 .replace('с/д','')
                 .replace('с/в','')
-                .replace('награвии','грав')
+                // .replace('награвии','грав')
+                // .replace('награвии','грав')
+                .replace('награвии','')
+                // .replace('награвии','')
                 .replace('награните','гран')
                 .replace('фр.','')          
                 .replace('растворкладочныйцементныйм','')    
