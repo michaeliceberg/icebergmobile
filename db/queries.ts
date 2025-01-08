@@ -2,6 +2,7 @@ import {cache} from 'react'
 import db from './drizzle';
 import { expensesBid } from './schema';
 import { eq } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 
 
 export const getIncOut = cache(async () => {
@@ -41,6 +42,14 @@ export const uploadExpensesBid = cache(async (betonToAddObject: typeof expensesB
 		    zakaz: el.zakaz
 		}))
 	)
+
+
+	revalidatePath('/')
+	revalidatePath('/asphalt')
+	revalidatePath('/beton')
+	revalidatePath('/income')
+	revalidatePath('/expenses')
+	revalidatePath('/weights')
  
 });
 
@@ -73,6 +82,13 @@ export const updateExpensesBid = cache(async (betonToUpdateObject: typeof expens
 			massDone: el.massDone,
 		}).where (eq(expensesBid.zakaz, el.zakaz))
 	)) 
+
+	revalidatePath('/')
+	revalidatePath('/asphalt')
+	revalidatePath('/beton')
+	revalidatePath('/income')
+	revalidatePath('/expenses')
+	revalidatePath('/weights')
 
 
 })
@@ -122,12 +138,13 @@ export const updateRecipeInExpenses = cache(async (details: DetailsType, bid: st
 			}).where (eq(expensesBid.zakaz, bid))
 
 
-	// detailsToUpdateInExpenses.map(async el => (
-	// 	await db.update(expensesBid).set({
-	// 		massDone: el.massDone,
-	// 	}).where (eq(expensesBid.zakaz, el.zakaz))
-	// )) 
 
+	revalidatePath('/')
+	revalidatePath('/asphalt')
+	revalidatePath('/beton')
+	revalidatePath('/income')
+	revalidatePath('/expenses')
+	revalidatePath('/weights')
 
 })
 
