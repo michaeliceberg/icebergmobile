@@ -37,7 +37,7 @@ export const TableBeton = async ({
 
 
 
-    // 1 // Если есть кого обновить, обновляем (ОБНОВЛЯЕМ ПО МАССЕ)
+    // 1 // Если есть кого обновить, обновляем (ОБНОВЛЯЕМ ПО МАССЕ)   (сравниваем Бетон из Гугла с бетоном из Expenses по Заявке)
     //
     const betonToUpdate = beton.filter(bet_el => {
 
@@ -45,7 +45,7 @@ export const TableBeton = async ({
 
             //если заказ уже есть в expences, смотрим МАССУ
             //
-            return (exp_el.zakaz == bet_el[9] && +exp_el.massDone != +bet_el[1])
+            return (exp_el.zakaz == bet_el[9] && + exp_el.massDone != +bet_el[1])
         })
 
         if (foundBidNewMassDone.length > 0) {
@@ -180,9 +180,6 @@ export const TableBeton = async ({
     }
 
 
-
-
-    
 
     // 3 // Отображаем то что идет из гугла, 
     // добавляем рецепт из базы expenses, проверяя по bid
