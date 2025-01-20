@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label"
 import { startTransition, useState } from "react"
 import { BetonRecipeRadio } from "./beton-recipe-radio"
 import { recipe } from "@/db/schema"
+import { KeySquare } from "lucide-react"
 
 type Props = {
     stampFromBetonToRender: string  // Название Рецепта из Google после Replace 
@@ -25,6 +26,7 @@ type Props = {
     recipeData:  typeof recipe.$inferSelect[]  // Все рецепты чтобы Показать Варианты выбранного рецепта
     recipeDetails: {material: string, mass: number}[]  | string
     bid: string,
+    isModified: string,
 }
 
 
@@ -56,10 +58,11 @@ export function RecipeDialog({
     done,
     recipeData, // все рецепты из recipe
     recipeDetails,  // рецепт по умолчанию который мы запихали в первый раз в Expenses
-    bid
+    bid,
+    isModified
 }: Props) {
 
-
+  // console.log(isModified)
 
 
   // Смотрим , какие суффиксы есть у этого рецетпа (рецепта из гугла)
@@ -155,6 +158,11 @@ export function RecipeDialog({
             <p className="text-gray-600">
               {stampFromBetonToRender}
             </p>
+            {isModified == "1" && 
+            <p className="ml-1">
+              <KeySquare color="#74B72E" />
+            </p>}
+
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -477,7 +485,18 @@ export function RecipeDialog({
             type="submit" 
             onClick={handleOnClickButton}
           >
-            {recipeDetails instanceof Array ? "Сохранить изменения" : "Добавить рецепт"}
+            {recipeDetails instanceof Array 
+             ?
+            <div className="flex flex-1 justify-center ">
+              <p>
+                Сохранить изменения
+              </p>
+              <p className="ml-1">
+                <KeySquare color="#74B72E" />
+              </p>
+            </div>
+            :
+             "Добавить рецепт"}
 
             
           </Button>

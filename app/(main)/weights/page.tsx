@@ -10,7 +10,7 @@ import { Header } from "@/components/header"
  const WeightsPage = async () => {
 
     const weights = await getWeightsData()
-    console.log("weights: ", weights)
+    // console.log("weights: ", weights)
 
     // const weights = [
     //     [ 'Весы АЙСБЕРГ', '', '', '', '', '', '25.12.2024 12:30:28' ],

@@ -29,7 +29,7 @@ export const uploadNewWork = cache(async (
 ) => {
 	
 
-	console.log(detailsWork.carId,)
+	// console.log(detailsWork.carId,)
 
 	await db.insert(works).values(
 		{

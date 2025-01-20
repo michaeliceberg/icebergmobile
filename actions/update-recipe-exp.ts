@@ -35,6 +35,7 @@ export const updateRecipeInExpenses = cache(async (details: DetailsType, bid: st
 
 	await db.update(expensesBid).set({
 				details: JSON.stringify(details),
+        isModified: '1',
 			}).where (eq(expensesBid.zakaz, bid))
 
 

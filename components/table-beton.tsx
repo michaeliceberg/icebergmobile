@@ -90,7 +90,8 @@ export const TableBeton = async ({
                                     
                                     {/* <TableCell className="mx-auto flex content-center justify-center bg-green-200 rounded-xl">{el?.massDone + "/" + el?.massTodo}</TableCell> */}
                                     {/* <TableCell className="text-center flex-row flex  items-center content-center justify-center bg-green-200 rounded-xl">{el?.massDone + "/" + el?.massTodo}</TableCell> */}
-                                    <TableCell className="bg-green-200 align-middle rounded-xl flex text-center justify-center">{el?.massDone + "/" + el?.massTodo}</TableCell>
+                                    {/* <TableCell className="bg-green-200 align-middle rounded-xl flex text-center justify-center">{el?.massDone + "/" + el?.massTodo}</TableCell> */}
+                                    <TableCell className="bg-green-200 rounded-xl font-bold align-middle content-center m-auto text-center justify-center">{el?.massDone + "/" + el?.massTodo}</TableCell>
 
                                     
 
@@ -112,6 +113,7 @@ export const TableBeton = async ({
                                             recipeData = {recipeData}
                                             recipeDetails = {el?.details}
                                             bid = {el.zakaz}
+                                            isModified = {el.isModified}
                                         />
 
                                     </TableCell>

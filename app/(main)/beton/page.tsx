@@ -185,7 +185,7 @@ const betonWithDetailsToRender = beton.map(bet_el => {
 
         details: zakazNaidenVExpenses.length == 0 ? '' : detailsShowList(zakazNaidenVExpenses[0].details),
 
-        isModified: '0',
+        isModified: zakazNaidenVExpenses.length == 0 ? '' : zakazNaidenVExpenses[0].isModified,
         contrag: bet_el[4],
         zavod: bet_el[5],
 
