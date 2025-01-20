@@ -13,34 +13,74 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { updateRecipeInExpenses } from "@/db/queries"
 import { startTransition, useState } from "react"
+import { BetonRecipeRadio } from "./beton-recipe-radio"
+import { recipe } from "@/db/schema"
 
 type Props = {
-    stampFromBetonToRender: string
+    stampFromBetonToRender: string  // Название Рецепта из Google после Replace 
+    stampRow: string
     contrag: string
     done: string
-    // recipeData:  typeof recipe.$inferSelect[]
+    recipeData:  typeof recipe.$inferSelect[]  // Все рецепты чтобы Показать Варианты выбранного рецепта
     recipeDetails: {material: string, mass: number}[]  | string
     bid: string,
 }
 
+
+
+export const detailsShowList = (details: string) => {
+  if (details==undefined){return []}
+  // console.log(details)
+  const objDet = JSON.parse(details)
+  const values: string[] = Object.values(objDet)
+  const keys = Object.keys(objDet)
+
+  return keys.map((key, index) => {
+      return (
+          {
+              material: key,
+              mass: +values[index]
+              // mass: values
+               
+          }
+      )
+  })
+}
+
+
 export function RecipeDialog({
     stampFromBetonToRender,
+    stampRow,
     contrag,
     done,
-    // recipeData,
-    recipeDetails,
+    recipeData, // все рецепты из recipe
+    recipeDetails,  // рецепт по умолчанию который мы запихали в первый раз в Expenses
     bid
 }: Props) {
+
+
+
+
+  // Смотрим , какие суффиксы есть у этого рецетпа (рецепта из гугла)
+  //
+  const recipeVariants = recipeData.filter(el => stampFromBetonToRender.toLowerCase().includes(el.stampBase.toLocaleLowerCase()))
+
+
+  // смотрим какой из имеюихся Суффиксов написан в Самом рецепте (гугла)
+  //
+  const initialSuffix = recipeVariants.filter(el => stampRow.toLowerCase().includes(el.stampSuffix.toLowerCase()))
+  
+  let foundInitialSuffix = ''
+  if (initialSuffix.length > 0) {
+    foundInitialSuffix = initialSuffix[0].stampSuffix
+  }
 
 
   const [status, setStatus] = useState('')
 
 
   const handleOnClickButton = async () => {
-
-    console.log('pressed')
 
     startTransition(()=> {
 
@@ -55,111 +95,7 @@ export function RecipeDialog({
     // await updateRecipeInExpenses(details, bid)
   }
 
-  // // Смотрим, Есть ли рецепт данного бетона в базе Рецептов
-  // //
-  // const filteredRecipe = recipeData.filter(el => el.stamp.toLowerCase() == stampFromBetonToRender.toLowerCase())
   
-  // // if (filteredRecipe.length == 0) {
-  // //     throw new Error('Нет рецепта!');
-  // // }
-
-
-
-  // const stampOriginal = filteredRecipe.filter(el => el.isModified == '0')
-
-  // const stampModified = filteredRecipe.filter(el => el.isModified == '1')
-
-
-  // // const [isModified, setIsModified] = useState(0)
-
-  // // const [details, setDetails] = useState (
-  // //   {
-  // //     гранит5_20: 0,
-  // //     цемент42_5: 0,
-  // //     пц500д0: 0,
-  // //     песок_бет: 0,
-  // //     гравий5_20бет: 0,
-  // //     галька: 0,
-  // //     линамикс: 0,
-  // //     вода: 0,
-  // //     зола: 0,
-  // //     stam2: 0,
-  // //     цем42_5накши: 0,
-  // //     c3: 0,
-  // //     мурапоркомби: 0,
-  // //     basf: 0,
-  // //     мб10_50: 0,
-  // //     гран020: 0,
-  // //     пыль: 0,
-  // //     нтф: 0,
-  // //   }
-  // // )
-
-
-
-  // // Создаем ПУСТОЙ Details
-  // //
-  // let stampOriginalDetails = {
-  //     гранит5_20: 0,
-  //     цемент42_5: 0,
-  //     пц500д0: 0,
-  //     песок_бет: 0,
-  //     гравий5_20бет: 0,
-  //     галька: 0,
-  //     линамикс: 0,
-  //     вода: 0,
-  //     зола: 0,
-  //     stam2: 0,
-  //     цем42_5накши: 0,
-  //     c3: 0,
-  //     мурапоркомби: 0,
-  //     basf: 0,
-  //     мб10_50: 0,
-  //     гран020: 0,
-  //     пыль: 0,
-  //     нтф: 0,
-  // }
-
-  // //  Если нашёлся Рецепт в базе :
-  // //
-  // if (stampOriginal.length > 0) {
-  //   //
-  //   // Заполняем ПУСТОЙ Details
-  //   //
-  //   stampOriginalDetails = JSON.parse(stampOriginal[0].details)
-  // } 
-
-
-  // // Толкаем рецепт в Default useState
-  // //
-  // const [details, setDetails] = useState (
-  //   {
-  //     гранит5_20: stampOriginalDetails.гранит5_20,
-  //     цемент42_5: stampOriginalDetails.цемент42_5,
-  //     пц500д0: stampOriginalDetails.пц500д0,
-  //     песок_бет: stampOriginalDetails.песок_бет,
-  //     гравий5_20бет: stampOriginalDetails.гравий5_20бет,
-  //     галька: stampOriginalDetails.галька,
-  //     линамикс: stampOriginalDetails.линамикс,
-  //     вода: stampOriginalDetails.вода,
-  //     зола: stampOriginalDetails.зола,
-  //     stam2: stampOriginalDetails.stam2,
-  //     цем42_5накши: stampOriginalDetails.цем42_5накши,
-  //     c3: stampOriginalDetails.c3,
-  //     мурапоркомби: stampOriginalDetails.мурапоркомби,
-  //     basf: stampOriginalDetails.basf,
-  //     гран020: stampOriginalDetails.гран020,
-  //     мб10_50: stampOriginalDetails.мб10_50,
-  //     пыль: stampOriginalDetails.пыль,
-  //     нтф: stampOriginalDetails.нтф,
-  //   }
-  // )
-
-  
-
-
-  // console.log(recipeDetails)
-
   
   type DetailsType =    {
     гранит5_20: number,
@@ -207,49 +143,13 @@ export function RecipeDialog({
   )
 
 
-  // const [detailsMini, setDetailsMini] = useState (
-  //   [
-  //     {
-  //       material: 'гранит5_20',
-  //       mass: recipeDetails instanceof Array ? recipeDetails.filter(el=>el.material==='гранит5_20')[0].mass : 0,
-  //     },
-  //     {
-  //       material: 'цемент42',
-  //       mass: recipeDetails instanceof Array ? recipeDetails.filter(el=>el.material==='цемент42')[0].mass : 0,
-  //     },
-  //     {
-  //       material: 'пц500',
-  //       mass: recipeDetails instanceof Array ? recipeDetails.filter(el=>el.material==='пц500')[0].mass : 0,
-  //     },
-  //     {
-  //       material: 'песок_бет',
-  //       mass: recipeDetails instanceof Array ? recipeDetails.filter(el=>el.material==='песок_бет')[0].mass : 0,
-  //     },
-  //     {
-  //       material: 'гравий5_20бет',
-  //       mass: recipeDetails instanceof Array ? recipeDetails.filter(el=>el.material==='гравий5_20бет')[0].mass : 0,
-  //     },
-  //     {
-  //       material: 'галька',
-  //       mass: recipeDetails instanceof Array ? recipeDetails.filter(el=>el.material==='галька')[0].mass : 0,
-  //     },
-  //     {
-  //       material: 'линамикс',
-  //       mass: recipeDetails instanceof Array ? recipeDetails.filter(el=>el.material==='линамикс')[0].mass : 0,
-  //     },
-  //     {
-  //       material: 'зола',
-  //       mass: recipeDetails instanceof Array ? recipeDetails.filter(el=>el.material==='зола')[0].mass : 0,
-  //     },
-      
-  //   ]
-  // )
+  const [selectedValue, setSelectedValue] = useState('')
 
-
-
+  console.log(selectedValue)
 
   return (
     <Dialog>
+
       <DialogTrigger asChild>
         <Button variant='default' className="w-full">
             <p className="text-gray-600">
@@ -261,15 +161,39 @@ export function RecipeDialog({
         <DialogHeader>
           <DialogTitle>
             <p className="pb-2 flex justify-center content-center">{contrag}</p>
+
             <p className="pb-2 flex justify-center content-center text-white bg-gray-700 pt-2 rounded-xl">{stampFromBetonToRender.toUpperCase()}</p>
+            {/* <p className="pb-2 flex justify-center content-center text-white bg-gray-700 pt-2 rounded-xl">{stampRow.toUpperCase()}</p> */}
             <p className="mt-2 pb-2 flex justify-center content-center">{done}</p>
           </DialogTitle>
-          <DialogDescription>
 
-            {recipeDetails instanceof Array ? "Изменить рецепт:" : "⚠️ Новый рецепт!"}
+
+          <DialogDescription className="pt-5 pb-2">
+
+            {recipeDetails instanceof Array ? "Варианты рецепта:" : "⚠️ Новый рецепт!"}
 
           </DialogDescription>
+
+
+          {/* SUFFIX TODO: */}
+
+          <BetonRecipeRadio 
+
+            recipeVariants={recipeVariants} 
+            foundInitialSuffix={foundInitialSuffix}
+            setSelectedValue={setSelectedValue}
+            setDetails={setDetails}
+            
+
+          />
+
+
         </DialogHeader>
+
+
+
+
+
 
 
 
@@ -538,39 +462,6 @@ export function RecipeDialog({
 
 
 
-
-
-
-
-
-
-          {/* {detailsAsList.map (det => (
-
-
-            det.mass != 0 ?
-
-            <div key = {det.material+det.material} className="grid grid-cols-4 items-center gap-4">
-              <Label key = {det.material} htmlFor="name" className="text-right">
-                {det.material}
-              </Label>
-              <Input 
-                  key = {det.material+det.material+det.material}
-                  id={String(det.material)}
-                  value={det.mass}
-                  className="col-span-3" 
-                  // onChange={(e)=>{setDetails({...details, : +(e.target.value)}) }}
-                  // onChange={(e)=>{setDetails({...details, det.material: +(e.target.value)}) }}
-                  // onChange={(e)=>{setClickColumn({ ...clickColumn, name: 2 });}}
-                  onChange={(e)=>{setDetails({...details, цемент42_5: +(e.target.value)}) }}
-              />
-            </div>
-
-            : <></>
-
-          ))
-        } */}
-
-
         
             { status != '' &&
               <p className="mt-2 pb-2 flex justify-center content-center text-white bg-green-500 pt-2 rounded-xl">{status}</p> 
@@ -595,3 +486,4 @@ export function RecipeDialog({
     </Dialog>
   )
 }
+

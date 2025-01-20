@@ -10,14 +10,16 @@
     "db:studio": "npx drizzle-kit studio",
     "db:push": "npx drizzle-kit push",
     "db:seed": "tsx ./scripts/seed.ts",
-    "db:seed:m6": "tsx ./scripts/seedMath6.ts"
+    "db:seed:cars": "tsx ./scripts/seed-cars.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.4",
     "@neondatabase/serverless": "^0.10.4",
     "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-label": "^2.1.1",
+    "@radix-ui/react-radio-group": "^1.2.2",
     "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-tabs": "^1.1.2",
     "@radix-ui/react-visually-hidden": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

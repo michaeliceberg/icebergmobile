@@ -1,4 +1,5 @@
-import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
 
 
@@ -45,10 +46,13 @@ export const incOut = pgTable('incOut', {
 export const recipe = pgTable('recipe', {
 	id: serial('id').primaryKey(),
 	date: timestamp('date').notNull().defaultNow(),
-	stamp: text('stamp').notNull(),
+
+	stampBase: text('stamp_base').notNull(),
+	stampSuffix: text('stamp_suffix').notNull(),
+
 	details: text('details').notNull(),
-	isModified: text('is_modified').notNull(),
-	stampModified: text('stamp_modified').notNull(),
+	// isModified: text('is_modified').notNull(),
+	// stampModified: text('stamp_modified').notNull(),
 	betonAsphalt: text('beton_asphalt').notNull(),
 	zavod: text('zavod').notNull(),
 });
@@ -61,10 +65,50 @@ export const expensesBid = pgTable('expenses_bid', {
 	stamp: text('stamp').notNull(),
 	massDone: text('mass_done').notNull(),
 	massTodo: text('mass_todo').notNull(),
+	
 	details: text('details').notNull(),
 	isModified: text('is_modified').notNull(),
+
 	contrag: text('contrag').notNull(),
 	zavod: text('zavod').notNull(),
 	zakaz: text('zakaz').notNull(),
 
 });
+
+
+
+export const cars = pgTable('cars', {
+	id: serial('id').primaryKey(),
+	carNum: text('car_num').notNull(),
+	type: text('type').notNull(),
+	odometer: text('odometer').notNull(),
+	driver: text('driver'),
+	TOprev: text('to_prev').notNull().default('0'),
+	TOnext: text('to_next').notNull().default('0'),
+});
+
+
+export const carsRelations = relations(cars, ({ many, one }) => ({
+	works: many(works),
+}));
+
+
+export const works = pgTable('works', {
+	id: serial('id').primaryKey(),
+	dateDone: timestamp('date_done').notNull().defaultNow(),
+	workDone:  text('work_done').notNull(),
+	odometerWas: text('odometer_was'),
+	nextTO: text('next_to'),
+	imageUrl: text('image_url'),
+	carId: integer('car_id')
+		.references(() => cars.id, { onDelete: 'cascade' })
+		.notNull(),
+});
+
+
+export const worksRelations = relations(works, ({ one }) => ({
+	unit: one(cars, {
+		fields: [works.carId],
+		references: [cars.id],
+	}),
+}));

@@ -24,12 +24,12 @@ export const uploadExpensesBid = cache(async (betonToAddObject: typeof expensesB
 	)
 
 
-	revalidatePath('/')
-	revalidatePath('/asphalt')
-	revalidatePath('/beton')
-	revalidatePath('/income')
-	revalidatePath('/expenses')
-	revalidatePath('/weights')
-	redirect('/beton');
+	// revalidatePath('/')
+	// revalidatePath('/asphalt')
+	// revalidatePath('/beton')
+	// revalidatePath('/income')
+	// revalidatePath('/expenses')
+	// revalidatePath('/weights')
+	// redirect('/beton');
  
 });
