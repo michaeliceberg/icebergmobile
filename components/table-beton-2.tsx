@@ -8,6 +8,7 @@ import {
   } from "@/components/ui/table"
 
 import { ReplaceBeton, ReplaceDate } from "./table-weights"
+import { RecipeDialog } from "./dialog-recipe"
   
 
   type Props = {
@@ -48,9 +49,9 @@ import { ReplaceBeton, ReplaceDate } from "./table-weights"
 
 
 
-export const TableBeton = async ({
+export const TableBeton2 = async ({
     betonWithDetailsToRender,
-    
+    recipeData
 }: Props) => {
 
 
@@ -68,8 +69,8 @@ export const TableBeton = async ({
                                 <TableHead>Контраг</TableHead>
                                 <TableHead>З</TableHead>
                                 <TableHead>🚚</TableHead>
-                                <TableHead className="text-right">Марка</TableHead>
-                                {/* <TableHead>Рецепт</TableHead> */}
+                                <TableHead>Марка</TableHead>
+                                <TableHead>Рецепт</TableHead>
                                 {/* <TableHead className="text-right">Авто №</TableHead> */}
                             </TableRow>
                         </TableHeader>
@@ -95,7 +96,7 @@ export const TableBeton = async ({
                                     
 
 
-                                    <TableCell>{el?.contrag.slice(0,5)}</TableCell>
+                                    <TableCell>{el?.contrag}</TableCell>
                                     <TableCell>{el?.zavod}</TableCell>
                                     <TableCell>{el?.numCars}</TableCell>
 
@@ -103,9 +104,6 @@ export const TableBeton = async ({
                                     {/* Кнопка РЕЦЕПТА  TODO:*/}
 
                                     <TableCell>
-                                        {ReplaceBeton(el?.stamp || '').slice(0,5)} 
-                                    </TableCell>
-                                    {/* <TableCell>
 
                                         <RecipeDialog 
                                             stampFromBetonToRender = {ReplaceBeton(el?.stamp || '')} 
@@ -118,9 +116,53 @@ export const TableBeton = async ({
                                             isModified = {el.isModified}
                                         />
 
-                                    </TableCell> */}
+                                    </TableCell>
 
-                                    
+                                    <TableCell >{
+                                            el?.details instanceof Array 
+                                            ? el?.details.map((elem, index) => 
+                                                // (
+                                                //     String(elem.toShow.mass) != '0' &&
+                                                //     <p key={index*98191} 
+                                                //         className=
+                                                //         {elem.toShow.material == "гравий" ?
+                                                //         "flex flex-1 text-foreground justify-between bg-gray-700 rounded-sm text-white pl-1 pr-1"
+                                                //         : elem.toShow.material == "ПесокБет"
+                                                //         ? "flex flex-1 text-foreground justify-between bg-orange-400 rounded-sm text-white pl-1 pr-1"
+                                                //         : elem.toShow.material == "Зола"
+                                                //         ? "flex flex-1 text-foreground justify-between bg-cyan-700 rounded-sm text-white pl-1 pr-1"
+                                                //         : "flex flex-1 text-foreground justify-between"}
+                                                //         >
+                                                //             {elem.toShow.material.slice(0,3)+"-"}
+                                                //             {String(elem.toShow.mass).split(".")[0]}
+                                                //     </p>
+                                                // )
+
+
+                                                (
+                                                    String(elem.mass) != '0' &&
+                                                    <p key={index*98191} 
+                                                        className=
+                                                        {elem.material == "гравий" ?
+                                                        "flex flex-1 text-foreground justify-between bg-gray-700 rounded-sm text-white pl-1 pr-1"
+                                                        : elem.material == "песок_бет"
+                                                        ? "flex flex-1 text-foreground justify-between bg-orange-400 rounded-sm text-white pl-1 pr-1"
+                                                        : elem.material == "Зола"
+                                                        ? "flex flex-1 text-foreground justify-between bg-cyan-700 rounded-sm text-white pl-1 pr-1"
+                                                        : "flex flex-1 text-foreground justify-between"}
+                                                        >
+                                                            {elem.material.slice(0,3)+"-"}
+                                                            {/* {String(elem.mass).split(".")[0]} */}
+                                                            {elem.mass}
+                                                    </p>
+                                                )
+                                            
+                                            
+                                            
+                                            ) 
+                                            : '⚠️ новый рецепт'
+                                        }
+                                    </TableCell>
 
                                     {/* <TableCell className="text-right">{el?.listCars.slice(0, 45)}</TableCell> */}
                                 </TableRow>

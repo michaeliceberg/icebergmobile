@@ -27,6 +27,8 @@ export const Sidebar = ({ className }: Props) => {
 
 			<SidebarItem label='Бетон' href='/beton' iconSrc='/ice_concretecar_icon.svg' />
 
+			<SidebarItem label='Рецепты Бет' href='/beton-recipe' iconSrc='/ice_beton_recipe_icon.svg' />
+
 			<SidebarItem label='Асфальт' href='/asphalt' iconSrc='/ice_asphalt_icon.svg' />
 
 			<SidebarItem label='Расход' href='/expenses' iconSrc='/ice_outcome_icon.svg' />
