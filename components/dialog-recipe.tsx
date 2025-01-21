@@ -212,6 +212,7 @@ export function RecipeDialog({
                 </Label>
                 <Input 
                     id='песок_бет'
+                    inputMode="numeric"
                     value={details.песок_бет}
                     className="col-span-3" 
                     onChange={(e)=>{setDetails({...details, песок_бет: +(e.target.value)}) }}
@@ -226,6 +227,7 @@ export function RecipeDialog({
                   гравий5_20бет
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='гравий5_20бет'
                     value={details.гравий5_20бет}
                     className="col-span-3" 
@@ -241,6 +243,7 @@ export function RecipeDialog({
                 цемент42
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='цемент42'
                     value={details.цемент42}
                     className="col-span-3" 
@@ -256,6 +259,7 @@ export function RecipeDialog({
                 пц500
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='пц500'
                     value={details.пц500}
                     className="col-span-3" 
@@ -271,6 +275,7 @@ export function RecipeDialog({
                   гранит5_20
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='гранит5_20'
                     value={details.гранит5_20}
                     className="col-span-3" 
@@ -286,6 +291,7 @@ export function RecipeDialog({
                 галька
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='галька'
                     value={details.галька}
                     className="col-span-3" 
@@ -301,6 +307,7 @@ export function RecipeDialog({
                 линамикс
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='линамикс'
                     value={details.линамикс}
                     className="col-span-3" 
@@ -314,6 +321,7 @@ export function RecipeDialog({
                 вода
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='вода'
                     value={details.вода}
                     className="col-span-3" 
@@ -327,6 +335,7 @@ export function RecipeDialog({
                 зола
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='зола'
                     value={details.зола}
                     className="col-span-3" 
@@ -341,6 +350,7 @@ export function RecipeDialog({
                 stam
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='stam'
                     value={details.stam}
                     className="col-span-3" 
@@ -355,6 +365,7 @@ export function RecipeDialog({
                 цемент42накши
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='цемент42накши'
                     value={details.цемент42накши}
                     className="col-span-3" 
@@ -370,6 +381,7 @@ export function RecipeDialog({
                 c3
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='c3'
                     value={details.c3}
                     className="col-span-3" 
@@ -385,6 +397,7 @@ export function RecipeDialog({
                 мурапор
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='мурапор'
                     value={details.мурапор}
                     className="col-span-3" 
@@ -399,6 +412,7 @@ export function RecipeDialog({
                 basf
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='basf'
                     value={details.basf}
                     className="col-span-3" 
@@ -414,6 +428,7 @@ export function RecipeDialog({
                 мб10_50
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='мб10_50'
                     value={details.мб10_50}
                     className="col-span-3" 
@@ -429,6 +444,7 @@ export function RecipeDialog({
                 гранит0_20
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='гранит0_20'
                     value={details.гранит0_20}
                     className="col-span-3" 
@@ -444,6 +460,7 @@ export function RecipeDialog({
                 пыль
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='пыль'
                     value={details.пыль}
                     className="col-span-3" 
@@ -458,6 +475,7 @@ export function RecipeDialog({
                 нтф
                 </Label>
                 <Input 
+                    inputMode="numeric"
                     id='нтф'
                     value={details.нтф}
                     className="col-span-3" 
