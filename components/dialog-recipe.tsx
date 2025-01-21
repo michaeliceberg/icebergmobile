@@ -212,7 +212,7 @@ export function RecipeDialog({
                 </Label>
                 <Input 
                     id='песок_бет'
-                    inputMode="text"
+                    inputMode="tel"
                     pattern="[0-9.,]+"
                     value={details.песок_бет}
                     className="col-span-3" 
@@ -228,7 +228,7 @@ export function RecipeDialog({
                   гравий5_20бет
                 </Label>
                 <Input 
-                    inputMode="text"
+                    inputMode="tel"
                     pattern="[0-9.,асф]+"
                     id='гравий5_20бет'
                     value={details.гравий5_20бет}
