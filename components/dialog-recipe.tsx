@@ -212,8 +212,7 @@ export function RecipeDialog({
                 </Label>
                 <Input 
                     id='песок_бет'
-                    inputMode="tel"
-                    pattern="[0-9.,]+"
+                    inputMode="numeric"
                     value={details.песок_бет}
                     className="col-span-3" 
                     onChange={(e)=>{setDetails({...details, песок_бет: +(e.target.value)}) }}
@@ -228,8 +227,7 @@ export function RecipeDialog({
                   гравий5_20бет
                 </Label>
                 <Input 
-                    inputMode="tel"
-                    pattern="[0-9.,асф]+"
+                    inputMode="numeric"
                     id='гравий5_20бет'
                     value={details.гравий5_20бет}
                     className="col-span-3" 
