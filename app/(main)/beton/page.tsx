@@ -1,5 +1,6 @@
 import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
 import { updateExpensesBid } from "@/actions/update-expenses-bid"
+import { getBetonData } from "@/app/_lib/readSheet"
 import { FeedWrapper } from "@/components/feed-wrapper"
 import { Header } from "@/components/header"
 import { StickyWrapper } from "@/components/sticky-wrapper"
@@ -9,17 +10,36 @@ import { ReplaceBeton } from "@/components/table-weights"
 import { UserProgress } from "@/components/user-progress"
 import { constBeton } from "@/constBeton"
 import { getExpensesBid, getRecipe } from "@/db/queries"
+import { redirect } from "next/navigation"
+// import { redirect } from "next/navigation"
 
 
  const BetonPage = async () => {
 
   
-const beton = constBeton
-    
+// let beton = constBeton
+
+let beton = await getBetonData()
+
+
+if (!beton) {
+    throw new Error('Нет бетона!');
+}
+
+
+// if (!beton) {
+//     redirect('/');
+// }
+
+
+
 // const betonSliсe = beton.slice(5,200).filter(el=>el[0] != '')
+// beton = betonSliсe
 
+beton = beton.slice(5,20).filter(el=>el[0] != '')
+// beton = betonSliсe
 
-
+console.log(beton)
 
 
 const recipeData = await getRecipe()

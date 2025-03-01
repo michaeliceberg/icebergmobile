@@ -1,8 +1,8 @@
 import {cache} from 'react'
 import db from './drizzle';
-import { expensesBid } from './schema';
-import { eq } from 'drizzle-orm';
-import { revalidatePath } from 'next/cache';
+// import { expensesBid } from './schema';
+// import { eq } from 'drizzle-orm';
+// import { revalidatePath } from 'next/cache';
 
 
 export const getIncOut = cache(async () => {

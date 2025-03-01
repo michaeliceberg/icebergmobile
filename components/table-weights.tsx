@@ -77,16 +77,17 @@ export const TableInOut = ({
     return(
         <div>
             <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
+                <TableCaption>Выпуск бетона</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[100px]">Время</TableHead>
+                    {/* <TableHead className="w-[100px]">Время</TableHead> */}
+                    <TableHead>Время</TableHead>
                         <TableHead>Материал</TableHead>
                         <TableHead>т/м³</TableHead>
                         <TableHead>Контраг</TableHead>
                         <TableHead>З</TableHead>
                         {/* <TableHead>Авто №</TableHead> */}
-                        <TableHead className="text-right">Авто №</TableHead>
+                        {/* <TableHead className="text-right">Авто №</TableHead> */}
                     </TableRow>
                 </TableHeader>
 
@@ -125,7 +126,10 @@ export const TableInOut = ({
                             
                             >{el[4]}</TableCell>
                             {/* <TableCell>{el[5]}</TableCell> */}
-                            <TableCell className="text-right">{el[5]}</TableCell>
+                            {/* <TableCell className="text-right">{el[5]}</TableCell> */}
+                            {/* <TableCell className="text-right">{el[5].slice(0,5)}</TableCell> */}
+
+                            
                         </TableRow>
                     ))}
                     

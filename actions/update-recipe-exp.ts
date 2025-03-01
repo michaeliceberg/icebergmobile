@@ -40,12 +40,12 @@ export const updateRecipeInExpenses = cache(async (details: DetailsType, bid: st
 
 
 
-	revalidatePath('/')
-	revalidatePath('/asphalt')
-	revalidatePath('/beton')
-	revalidatePath('/income')
-	revalidatePath('/expenses')
-	revalidatePath('/weights')
+	// revalidatePath('/')
+	// revalidatePath('/asphalt')
+	// revalidatePath('/beton')
+	// revalidatePath('/income')
+	// revalidatePath('/expenses')
+	// revalidatePath('/weights')
 	redirect('/beton');
 })
 

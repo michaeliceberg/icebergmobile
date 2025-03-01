@@ -42,7 +42,7 @@ export const uploadNewWork = cache(async (
 		})
 	
 
-		revalidatePath('/')
+		// revalidatePath('/')
 		revalidatePath('/allwork')
 		revalidatePath('/warehouse')
 		redirect('/');
