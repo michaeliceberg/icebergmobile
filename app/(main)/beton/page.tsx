@@ -8,9 +8,9 @@ import { TableBeton } from "@/components/table-beton"
 import { ReplaceBeton } from "@/components/table-weights"
 
 import { UserProgress } from "@/components/user-progress"
-import { constBeton } from "@/constBeton"
+// import { constBeton } from "@/constBeton"
 import { getExpensesBid, getRecipe } from "@/db/queries"
-import { redirect } from "next/navigation"
+// import { redirect } from "next/navigation"
 // import { redirect } from "next/navigation"
 
 
@@ -39,7 +39,7 @@ if (!beton) {
 beton = beton.slice(5,20).filter(el=>el[0] != '')
 // beton = betonSliсe
 
-console.log(beton)
+// console.log(beton)
 
 
 const recipeData = await getRecipe()
