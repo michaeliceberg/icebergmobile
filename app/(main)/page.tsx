@@ -5,7 +5,7 @@ import { UserProgress } from "@/components/user-progress"
 // import { TableInOut } from "@/components/table-inout"
 import { TableIncome } from "@/components/table-income"
 import { getDailyIncomeData } from "../_lib/readSheet"
-import { Header } from "@/components/header"
+import { HeaderWTU } from "@/components/header-with-time-update"
 // import { useRecipeModal } from "../store/use-exit-modal"
 
 
@@ -17,6 +17,25 @@ import { Header } from "@/components/header"
     if (!dailyIncome) {
 		throw new Error('Нет прихода!');
 	}
+
+
+
+
+
+    // ПОСЛЕДНЕЕ ОБНОВАЛЕНИЕ
+    const dateTimeUpdate:string = dailyIncome[0][5].split(/(\s+)/);
+
+    // const timeHourMinute = dateTimeUpdate.split(":");
+
+
+    const dateUpd = dateTimeUpdate [0]
+
+    // det Hours Minutes
+    //
+    const timeUpd = dateTimeUpdate [2].slice(0, -3)
+
+
+
 
     //Look Щ П М
     //
@@ -57,7 +76,7 @@ import { Header } from "@/components/header"
             </StickyWrapper>
 
             <FeedWrapper>
-                <Header title='Приход Материала'/>
+                <HeaderWTU title='Приход Материала' dateUpd={dateUpd} timeUpd={timeUpd} />
 
                 {+skolkoShelkovo > 0 && 
                     <TableIncome сity={'Щёлково'} dailyIncome={dailyIncomeShelkovo} />

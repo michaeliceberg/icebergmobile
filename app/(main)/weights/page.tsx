@@ -2,9 +2,9 @@ import { FeedWrapper } from "@/components/feed-wrapper"
 import { StickyWrapper } from "@/components/sticky-wrapper"
 import { UserProgress } from "@/components/user-progress"
 // import { getIncOut } from "@/db/queries"
-import { TableInOut } from "@/components/table-weights"
+import { TableWeights } from "@/components/table-weights"
 import { getWeightsData } from "../../_lib/readSheet"
-import { Header } from "@/components/header"
+import { HeaderWTU } from "@/components/header-with-time-update"
 
 
  const WeightsPage = async () => {
@@ -156,8 +156,26 @@ import { Header } from "@/components/header"
     // const updateTime = weights[1][1]
     // const sum = weights[2][6]
 
+    // ПОСЛЕДНЕЕ ОБНОВАЛЕНИЕ
+    const dateTimeUpdate:string = weights[0][6].split(/(\s+)/);
+
+    // const timeHourMinute = dateTimeUpdate.split(":");
+
+
+    const dateUpd = dateTimeUpdate [0]
+
+    // det Hours Minutes
+    //
+    const timeUpd = dateTimeUpdate [2].slice(0, -3)
+
+    
+
+        
+
+
     const weightsSliсe = weights.slice(6,)
 
+    
 
     return(
         <div className="flex flex-row-reverse gap-[48px] px-6">
@@ -166,9 +184,9 @@ import { Header } from "@/components/header"
             </StickyWrapper>
 
             <FeedWrapper>
-                <Header title='Весы'/>
+                <HeaderWTU title='Весы' dateUpd={dateUpd} timeUpd={timeUpd} />
 
-                <TableInOut weights={weightsSliсe} />
+                <TableWeights weights={weightsSliсe} />
             </FeedWrapper>
         </div>
     )

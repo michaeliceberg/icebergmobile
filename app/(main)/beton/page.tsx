@@ -2,7 +2,7 @@ import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
 import { updateExpensesBid } from "@/actions/update-expenses-bid"
 import { getBetonData } from "@/app/_lib/readSheet"
 import { FeedWrapper } from "@/components/feed-wrapper"
-import { Header } from "@/components/header"
+import { HeaderWTU } from "@/components/header-with-time-update"
 import { StickyWrapper } from "@/components/sticky-wrapper"
 import { TableBeton } from "@/components/table-beton"
 import { ReplaceBeton } from "@/components/table-weights"
@@ -25,6 +25,23 @@ let beton = await getBetonData()
 if (!beton) {
     throw new Error('Нет бетона!');
 }
+
+
+
+// ПОСЛЕДНЕЕ ОБНОВАЛЕНИЕ
+const dateTimeUpdate:string = beton[0][6].split(/(\s+)/);
+
+// const timeHourMinute = dateTimeUpdate.split(":");
+
+
+const dateUpd = dateTimeUpdate [0]
+
+// det Hours Minutes
+//
+const timeUpd = dateTimeUpdate [2].slice(0, -3)
+
+    
+
 
 
 // if (!beton) {
@@ -233,13 +250,13 @@ const betonWithDetailsToRender = beton.map(bet_el => {
 
 
 return(
-    <div className="flex flex-row-reverse gap-[48px] px-6">
+    <div className="flex flex-row-reverse gap-[48px]">
         <StickyWrapper>
             <UserProgress />
         </StickyWrapper>
 
         <FeedWrapper>
-            <Header title='Бетон'/>
+            <HeaderWTU title='Бетон' dateUpd={dateUpd} timeUpd={timeUpd} />
 
             <TableBeton betonWithDetailsToRender={betonWithDetailsToRender} recipeData={recipeData}/>
         </FeedWrapper>

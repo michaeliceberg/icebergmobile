@@ -4,7 +4,7 @@ import { UserProgress } from "@/components/user-progress"
 import { getDailyIncomeData } from "../../_lib/readSheet"
 // import { TableInOut } from "@/components/table-inout"
 import { TableIncome } from "@/components/table-income"
-import { Header } from "@/components/header"
+import { HeaderWTU } from "@/components/header-with-time-update"
 
 
 
@@ -55,9 +55,20 @@ const IncomePage = async () => {
 
 
 
+
+
+    // ПОСЛЕДНЕЕ ОБНОВЛЕНИЕ
+    const dateTimeUpdate:string = dailyIncome[0][5].split(/(\s+)/);
     
-    // const headerDate = dailyIncome[1]
-    // console.log(headerDate)
+    // const timeHourMinute = dateTimeUpdate.split(":");
+
+
+    const dateUpd = dateTimeUpdate [0]
+    
+    // det Hours Minutes
+    //
+    const timeUpd = dateTimeUpdate [2].slice(0, -3)
+    
 
     //Look Щ П М
     //
@@ -98,7 +109,7 @@ const IncomePage = async () => {
             </StickyWrapper>
 
             <FeedWrapper>
-                <Header title='Приход Материала'/>
+                <HeaderWTU title='Приход Материала' dateUpd={dateUpd} timeUpd={timeUpd} />
 
                 {+skolkoShelkovo > 0 && 
                     <TableIncome сity={'Щёлково'} dailyIncome={dailyIncomeShelkovo} />

@@ -65,7 +65,7 @@ export const ReplaceBeton = (beton: string) => {
 }
 
     
-export const TableInOut = ({
+export const TableWeights = ({
     weights
 }: Props) => {
 

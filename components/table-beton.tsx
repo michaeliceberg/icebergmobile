@@ -57,7 +57,7 @@ export const TableBeton = async ({
     return(
         <div>
             <div>
-                <div className="pb-20">
+                <div>
                     <Table>
                         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
                         <TableHeader>
