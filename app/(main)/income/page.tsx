@@ -10,6 +10,7 @@ import { HeaderWTU } from "@/components/header-with-time-update"
 
 const IncomePage = async () => {
 
+    
     const dailyIncome = await getDailyIncomeData()
 
 

@@ -3,6 +3,7 @@ import { StickyWrapper } from "@/components/sticky-wrapper"
 import { UserProgress } from "@/components/user-progress"
 import { Header } from "@/components/header"
 import { TabCars } from "@/components/tab"
+import { Zap } from "lucide-react"
 // import { Uploader } from "@/components/uploader"
 
 
@@ -174,12 +175,15 @@ import { TabCars } from "@/components/tab"
     })
 
 
+    // СОРТИРОВКА ПО АЛФАВИТУ гос НОМЕРА
+    //
     carsObject.sort(function(a, b) {
         const textA = a.carNum.toUpperCase();
         const textB = b.carNum.toUpperCase();
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
 
+    
     const mixers = carsObject.filter(el => el.type.toUpperCase()== 'М')
     const tonars = carsObject.filter(el => el.type.toUpperCase() == 'Т')
     const samosv = carsObject.filter(el => el.type.toUpperCase() == 'С')
@@ -189,7 +193,9 @@ import { TabCars } from "@/components/tab"
     // console.log(mixers)
 
 
+    const NumCarsZeroOdometer = carsObject.filter(el => el.odometer == "0").length
 
+    // console.log(NumCarsZeroOdometer)
 
 
     return(
@@ -201,6 +207,16 @@ import { TabCars } from "@/components/tab"
             <FeedWrapper>
                 <Header title='Автопарк'/>
 
+                {NumCarsZeroOdometer > 0 && 
+
+                    <div className="flex mt-10 gap-2 border-2 border-yellow-400 border-dashed justify-center p-4 w-full rounded-xl">
+                        <Zap className='h-5 w-5 stroke-2 text-yellow-400' />
+                        <p>
+                            {NumCarsZeroOdometer} авто с пробегом 0 км
+                        </p>
+                    </div>
+                }
+              
 
                 <div className="mt-5 mb-5">
                     <TabCars FourTypes={FourTypes} />

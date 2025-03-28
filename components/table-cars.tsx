@@ -67,6 +67,10 @@ export const TableCars = ({
 
 
                 <TableBody>
+
+                   
+
+
                     {carsObject.map((el, index) => (
                         <TableRow key={index}>
 
@@ -104,7 +108,7 @@ export const TableCars = ({
                     ))}
                     
                 </TableBody>
-                </Table>
+            </Table>
         </div>
     )
 }

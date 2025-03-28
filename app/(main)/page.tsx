@@ -12,6 +12,12 @@ import { HeaderWTU } from "@/components/header-with-time-update"
  const IncomePage = async () => {
 
 
+
+    
+
+
+
+
     const dailyIncome = await getDailyIncomeData()
 
     if (!dailyIncome) {
@@ -36,7 +42,9 @@ import { HeaderWTU } from "@/components/header-with-time-update"
 
 
 
+    window.navigator.vibrate(200)
 
+    
     //Look Щ П М
     //
     const skolkoShelkovo = dailyIncome.filter(el => el[3] == 'Щёлково')[0][1]
