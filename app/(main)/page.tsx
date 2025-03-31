@@ -42,7 +42,7 @@ import { HeaderWTU } from "@/components/header-with-time-update"
 
 
 
-    window.navigator.vibrate(200)
+    // window.navigator.vibrate(200)
 
     
     //Look Щ П М

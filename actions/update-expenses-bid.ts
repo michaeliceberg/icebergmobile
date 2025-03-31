@@ -22,12 +22,12 @@ export const updateExpensesBid = cache(async (betonToUpdateObject: typeof expens
 	
 	)) 
 
-	// revalidatePath('/')
-	// revalidatePath('/asphalt')
+	revalidatePath('/')
+	revalidatePath('/asphalt')
 	// revalidatePath('/beton')
-	// revalidatePath('/income')
-	// revalidatePath('/expenses')
-	// revalidatePath('/weights')
-	// redirect('/beton');
+	revalidatePath('/income')
+	revalidatePath('/expenses')
+	revalidatePath('/weights')
+	redirect('/beton');
 
 })
