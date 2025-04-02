@@ -29,7 +29,7 @@ if (!beton) {
 
 
 
-console.log(beton.slice(0, 4))
+// console.log(beton.slice(0, 4))
 
 
 
@@ -69,6 +69,9 @@ beton = beton.slice(5,20).filter(el=>el[0] != '')
 // console.log(beton)
 
 
+
+// TODO:
+//
 const recipeData = await getRecipe()
 const expensesBid = await getExpensesBid()
 
@@ -247,7 +250,7 @@ const betonWithDetailsToRender = beton.map(bet_el => {
 
 
 
-
+// console.log(betonToUpdateObject)
 
 
 

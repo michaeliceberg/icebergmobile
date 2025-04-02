@@ -10,6 +10,8 @@ import { revalidatePath } from 'next/cache';
 
 export const uploadExpensesBid = cache(async (betonToAddObject: typeof expensesBid.$inferSelect[]) => {
 	
+	// await console.log('uploaded expenses bid')
+
 	await db.insert(expensesBid).values(betonToAddObject.map(el=>  ({
 		    date: el.date,
 		    betonAsphalt: el.betonAsphalt,
@@ -25,7 +27,7 @@ export const uploadExpensesBid = cache(async (betonToAddObject: typeof expensesB
 	)
 
 
-	console.log('uploaded expenses bid')
+	
 
 	revalidatePath('/')
 	revalidatePath('/asphalt')

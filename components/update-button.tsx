@@ -5,6 +5,7 @@ import { Button } from './ui/button'
 import { expensesBid } from '@/db/schema'
 import { updateExpensesBid } from '@/actions/update-expenses-bid'
 import { uploadExpensesBid } from '@/actions/insert-espenses-bid'
+import { revalidatePath } from 'next/cache'
 
 
 
@@ -29,23 +30,24 @@ export const UpdateButton =  ( {
     // if (betonToAddObject.length > 0) {
     //     await uploadExpensesBid(betonToAddObject)
     // }
-    useEffect(()=>{
+    // useEffect(()=>{
 
         if (betonToUpdateObject.length > 0) {
             updateExpensesBid(betonToUpdateObject)
 
-
+            console.log('updateExpensesBid')
         }
 
         if (betonToAddObject.length > 0) {
             uploadExpensesBid(betonToAddObject)
+            console.log('betonToAddObject')
 
         }
         
-    }, [])
+    // }, [])
 
     
-    
+
     
 
   return (

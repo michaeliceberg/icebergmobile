@@ -1,3 +1,6 @@
+'use client'
+
+
 import {
     Table,
     TableBody,
@@ -7,6 +10,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { revalidatePath } from "next/cache"
 // import { ReplaceDate } from "./table-weights"
 // import { incOut } from "@/db/schema"
   
@@ -25,6 +29,17 @@ import {
   export const TableIncome = ({
     сity, dailyIncome
 }: Props) => {
+
+
+
+
+    revalidatePath('/')
+	revalidatePath('/asphalt')
+	revalidatePath('/beton')
+	revalidatePath('/income')
+	revalidatePath('/expenses')
+	revalidatePath('/weights')
+
 
 
     return(
