@@ -24,7 +24,7 @@ export const updateExpensesBid = cache(async (betonToUpdateObject: typeof expens
 
 	revalidatePath('/')
 	revalidatePath('/asphalt')
-	// revalidatePath('/beton')
+	revalidatePath('/beton')
 	revalidatePath('/income')
 	revalidatePath('/expenses')
 	revalidatePath('/weights')

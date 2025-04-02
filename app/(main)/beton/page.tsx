@@ -1,11 +1,12 @@
-import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
-import { updateExpensesBid } from "@/actions/update-expenses-bid"
+// import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
+// import { updateExpensesBid } from "@/actions/update-expenses-bid"
 import { getBetonData } from "@/app/_lib/readSheet"
 import { FeedWrapper } from "@/components/feed-wrapper"
 import { HeaderWTU } from "@/components/header-with-time-update"
 import { StickyWrapper } from "@/components/sticky-wrapper"
 import { TableBeton } from "@/components/table-beton"
 import { ReplaceBeton } from "@/components/table-weights"
+import { UpdateButton } from "@/components/update-button"
 
 import { UserProgress } from "@/components/user-progress"
 // import { constBeton } from "@/constBeton"
@@ -26,19 +27,24 @@ if (!beton) {
     throw new Error('Нет бетона!');
 }
 
+// console.log(beton.slice(0, 4))
 
 
-// ПОСЛЕДНЕЕ ОБНОВАЛЕНИЕ
-const dateTimeUpdate:string = beton[0][6].split(/(\s+)/);
+// ПОСЛЕДНЕЕ ОБНОВЛЕНИЕ
+const dateTimeUpdate:string = beton.slice(0, 4)[3][0].split(/(\s+)/)
 
 // const timeHourMinute = dateTimeUpdate.split(":");
 
 
-const dateUpd = dateTimeUpdate [0]
+// const dateUpd = dateTimeUpdate [0]
 
 // det Hours Minutes
 //
-const timeUpd = dateTimeUpdate [2].slice(0, -3)
+// const timeUpd = dateTimeUpdate[2].slice(0, -3)
+
+
+const dateUpd = dateTimeUpdate[4]
+const timeUpd = dateTimeUpdate[2]
 
     
 
@@ -100,9 +106,9 @@ const betonToUpdateObject = betonToUpdate.map(el => {
 })
 // ОБНОВЛЯЕМ ТОЛЬКО MASS DONE,   details не обновляем
 //
-if (betonToUpdateObject.length > 0) {
-    await updateExpensesBid(betonToUpdateObject)
-}
+// if (betonToUpdateObject.length > 0) {
+//     await updateExpensesBid(betonToUpdateObject)
+// }
 
 
 
@@ -174,9 +180,9 @@ const betonToAddObject = betonToAdd.map(el => {
     )
 })
 
-if (betonToAddObject.length > 0) {
-    await uploadExpensesBid(betonToAddObject)
-}
+// if (betonToAddObject.length > 0) {
+//     await uploadExpensesBid(betonToAddObject)
+// }
 
 
 
@@ -259,6 +265,9 @@ return(
             <HeaderWTU title='Бетон' dateUpd={dateUpd} timeUpd={timeUpd} />
 
             <TableBeton betonWithDetailsToRender={betonWithDetailsToRender} recipeData={recipeData}/>
+
+
+            <UpdateButton  betonToUpdateObject = {betonToUpdateObject}  betonToAddObject = {betonToAddObject}/>
         </FeedWrapper>
     </div>
     )

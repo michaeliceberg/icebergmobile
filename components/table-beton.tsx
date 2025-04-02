@@ -8,7 +8,7 @@ import {
   } from "@/components/ui/table"
 
 import { ReplaceBeton, ReplaceDate } from "./table-weights"
-import { RevalidateMeComp } from "./revalidateMeComp";
+// import { RevalidateMeComp } from "./revalidateMeComp";
   
 
   type Props = {
@@ -132,7 +132,7 @@ export const TableBeton = async ({
                     </Table>
                 </div>
             </div>
-            <RevalidateMeComp />
+            {/* <RevalidateMeComp /> */}
         </div>
     )
   }

@@ -1,10 +1,10 @@
-import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
+// import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
 import { updateExpensesBid } from "@/actions/update-expenses-bid"
 import { FeedWrapper } from "@/components/feed-wrapper"
 import { Header } from "@/components/header"
 import { StickyWrapper } from "@/components/sticky-wrapper"
 import { TableBeton2 } from "@/components/table-beton-2"
-import { ReplaceBeton } from "@/components/table-weights"
+// import { ReplaceBeton } from "@/components/table-weights"
 
 import { UserProgress } from "@/components/user-progress"
 import { constBeton } from "@/constBeton"
@@ -73,73 +73,73 @@ if (betonToUpdateObject.length > 0) {
 // 2 // Если есть новые, (не нашли совпадение заказа Beton с Expenses) 
 // добаляем к ним рецепт из Recipe (если есть или '') и добавляем в Expenses
 //
-const betonToAdd = beton.filter(bet_el => {
+// const betonToAdd = beton.filter(bet_el => {
 
-    const foundNewBid = expensesBid.filter(exp_el => {
-        return exp_el.zakaz == bet_el[9]
-    })
+//     const foundNewBid = expensesBid.filter(exp_el => {
+//         return exp_el.zakaz == bet_el[9]
+//     })
 
-    if (foundNewBid.length == 0) {
-        //
-        // такого заказа НЕ нашли в БД expensesBid, поэтому его возвращаем
-        //
-        return bet_el
-}})
-
-
+//     if (foundNewBid.length == 0) {
+//         //
+//         // такого заказа НЕ нашли в БД expensesBid, поэтому его возвращаем
+//         //
+//         return bet_el
+// }})
 
 
 
 
 
-const betonToAddObject = betonToAdd.map(el => {
-    return (
-        {
-            id: 1000,
-            date: el[0],
-            betonAsphalt: 'beton',
-            stamp: el[7],
-            massDone: el[1],
-            massTodo: el[3],
+
+
+// const betonToAddObject = betonToAdd.map(el => {
+//     return (
+//         {
+//             id: 1000,
+//             date: el[0],
+//             betonAsphalt: 'beton',
+//             stamp: el[7],
+//             massDone: el[1],
+//             massTodo: el[3],
             
-            // добавляем Рецепт из Recipe   Проверяем есть ли Base и Suffix в Google Stamp   (если нет запишем '')
-            //
+//             // добавляем Рецепт из Recipe   Проверяем есть ли Base и Suffix в Google Stamp   (если нет запишем '')
+//             //
 
-            // details: recipeData.filter(rec => 
-            //     ReplaceBeton(rec.stamp) == ReplaceBeton(el[7])).length > 0 
-            //     ? String(recipeData.filter(rec => 
-            //         ReplaceBeton(rec.stamp) == ReplaceBeton(el[7]))[0].details)
-            //     : '',
+//             // details: recipeData.filter(rec => 
+//             //     ReplaceBeton(rec.stamp) == ReplaceBeton(el[7])).length > 0 
+//             //     ? String(recipeData.filter(rec => 
+//             //         ReplaceBeton(rec.stamp) == ReplaceBeton(el[7]))[0].details)
+//             //     : '',
 
 
 
-            details: recipeData.filter(rec => 
+//             details: recipeData.filter(rec => 
 
-                ReplaceBeton(el[7]).toLowerCase().includes(rec.stampBase.toLocaleLowerCase())                
+//                 ReplaceBeton(el[7]).toLowerCase().includes(rec.stampBase.toLocaleLowerCase())                
                 
-                ).length > 0   // Отфильтровали ХОТЯ бы один рецепт
+//                 ).length > 0   // Отфильтровали ХОТЯ бы один рецепт
 
-                ? String(recipeData.filter(rec => 
+//                 ? String(recipeData.filter(rec => 
 
-                    ReplaceBeton(el[7]).toLowerCase().includes(rec.stampBase.toLocaleLowerCase())
+//                     ReplaceBeton(el[7]).toLowerCase().includes(rec.stampBase.toLocaleLowerCase())
 
-                )[0].details)
+//                 )[0].details)
                 
-                : '',
+//                 : '',
 
 
-            isModified: '0',
-            contrag: el[4],
-            zavod: el[5],
-            zakaz: el[9]
+//             isModified: '0',
+//             contrag: el[4],
+//             zavod: el[5],
+//             zakaz: el[9]
 
-        }
-    )
-})
+//         }
+//     )
+// })
 
-if (betonToAddObject.length > 0) {
-    await uploadExpensesBid(betonToAddObject)
-}
+// if (betonToAddObject.length > 0) {
+//     await uploadExpensesBid(betonToAddObject)
+// }
 
 
 

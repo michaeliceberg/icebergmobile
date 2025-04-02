@@ -16,7 +16,7 @@ function getRandomInt(min: number, max: number) {
 
 
 
-export const uploadNewWork = cache(async (
+  export const uploadNewWork = cache(async (
 	detailsWork: 
 		{      
 			id: number,
