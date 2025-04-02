@@ -33,12 +33,12 @@ import { revalidatePath } from "next/cache"
 
 
 
-    revalidatePath('/')
-	revalidatePath('/asphalt')
-	revalidatePath('/beton')
-	revalidatePath('/income')
-	revalidatePath('/expenses')
-	revalidatePath('/weights')
+    // revalidatePath('/')
+	// revalidatePath('/asphalt')
+	// revalidatePath('/beton')
+	// revalidatePath('/income')
+	// revalidatePath('/expenses')
+	// revalidatePath('/weights')
 
 
 

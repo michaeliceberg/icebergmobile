@@ -23,6 +23,10 @@ export const UpdateButton =  ( {
 }: Props ) => {
 
 
+    const handleClick = () => {
+        updateExpensesBid(betonToUpdateObject)
+        uploadExpensesBid(betonToAddObject)
+    }
     // if (betonToUpdateObject.length > 0) {
     //     await updateExpensesBid(betonToUpdateObject)
     // }
@@ -32,17 +36,17 @@ export const UpdateButton =  ( {
     // }
     // useEffect(()=>{
 
-        if (betonToUpdateObject.length > 0) {
-            updateExpensesBid(betonToUpdateObject)
+        // if (betonToUpdateObject.length > 0) {
+        //     updateExpensesBid(betonToUpdateObject)
 
-            console.log('updateExpensesBid')
-        }
+        //     console.log('updateExpensesBid')
+        // }
 
-        if (betonToAddObject.length > 0) {
-            uploadExpensesBid(betonToAddObject)
-            console.log('betonToAddObject')
+        // if (betonToAddObject.length > 0) {
+        //     uploadExpensesBid(betonToAddObject)
+        //     console.log('betonToAddObject')
 
-        }
+        // }
         
     // }, [])
 
@@ -52,7 +56,7 @@ export const UpdateButton =  ( {
 
   return (
     <div>
-        <Button>
+        <Button onClick={handleClick}>
             +
         </Button>
     </div>
