@@ -25,6 +25,8 @@ export const uploadExpensesBid = cache(async (betonToAddObject: typeof expensesB
 	)
 
 
+	console.log('uploaded expenses bid')
+
 	revalidatePath('/')
 	revalidatePath('/asphalt')
 	revalidatePath('/beton')

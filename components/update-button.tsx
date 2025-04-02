@@ -34,6 +34,8 @@ export const UpdateButton =  ( {
         if (betonToUpdateObject.length > 0) {
             updateExpensesBid(betonToUpdateObject)
 
+            
+
         }
 
         if (betonToAddObject.length > 0) {
