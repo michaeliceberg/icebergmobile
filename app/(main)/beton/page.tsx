@@ -27,7 +27,11 @@ if (!beton) {
     throw new Error('Нет бетона!');
 }
 
-// console.log(beton.slice(0, 4))
+
+
+console.log(beton.slice(0, 4))
+
+
 
 
 // ПОСЛЕДНЕЕ ОБНОВЛЕНИЕ
@@ -260,7 +264,7 @@ return(
         <StickyWrapper>
             <UserProgress />
         </StickyWrapper>
-
+ 
         <FeedWrapper>
             <HeaderWTU title='Бетон' dateUpd={dateUpd} timeUpd={timeUpd} />
 
