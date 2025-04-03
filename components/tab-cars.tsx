@@ -12,9 +12,11 @@ type Props = {
     FourTypes: {
         id: number,
         carNum: string,
-        driver: string,
+        driver: string | null,
         type: string,
         odometer: string,
+        to_prev: string,
+        to_next: string,      
     }[][]
 }
 

@@ -39,8 +39,35 @@ const dateTimeUpdate:string = beton.slice(0, 4)[3][0].split(/(\s+)/)
 const dateUpd = dateTimeUpdate[4]
 const timeUpd = dateTimeUpdate[2]
 
+const cubesDoneToday:string = beton.slice(0, 4)[2][3].split(/(\s+)/)[0]
 
 
+// console.log(cubesDoneToday)
+
+
+
+const lastNumber = +cubesDoneToday.slice(-1)
+let finalWord:string = ''
+if (lastNumber == 1) {
+    finalWord = 'куб'
+} else if ([2, 3, 4].includes(lastNumber)){
+    finalWord = 'куба'
+} else if ([5, 6, 7, 8, 9, 0].includes(lastNumber)){ 
+    finalWord = 'кубов'
+}
+
+// console.log(lastNumber)
+// console.log(finalWord)
+
+// console.log(dateUpd)
+
+const dateUpdMonth =  dateUpd.slice(2, dateUpd.length)
+let dateUpdDay = dateUpd.slice(0, 2)
+if (dateUpdDay[0] == '0') {
+    dateUpdDay = dateUpdDay.slice(-1)
+}
+// console.log(dateUpdMonth)
+// console.log(dateUpdDay)
 // if (!beton) {
 //     redirect('/');
 // }
@@ -244,8 +271,6 @@ const betonWithDetailsToRender = beton.map(bet_el => {
 
 
 
-
-
 return(
     <div className="flex flex-row-reverse gap-[48px]">
         <StickyWrapper>
@@ -254,6 +279,18 @@ return(
  
         <FeedWrapper>
             <HeaderWTU title='Бетон' dateUpd={dateUpd} timeUpd={timeUpd} />
+            
+            <div className="flex content-center gap-2 justify-center text-center">
+                <h1 className="text-gray-500 mb-2">
+                    Сегодня {dateUpdDay} {dateUpdMonth} Отдали 
+                </h1>
+
+                <h1 className="font-bold mb-2">
+                    {cubesDoneToday} {finalWord}
+                </h1>
+            </div>
+
+
 
             <TableBeton betonWithDetailsToRender={betonWithDetailsToRender} recipeData={recipeData}/>
 

@@ -113,15 +113,15 @@ export const TableWeights = ({
                                     : "w-full rounded-xl  bg-neutral-700 font-bold text-white mt-2 flex items-center justify-between"
                                 }
                             >{ReplaceBeton(el[1])}</TableCell>
-                            <TableCell>{el[2]}</TableCell>
+                            <TableCell className="font-bold">{el[2]}</TableCell>
                             <TableCell>{el[3].slice(0,5)}</TableCell>
                             <TableCell className=
-                                                            {el[4] == 'Щ'
-                                                            ? "w-full rounded-xl  bg-green-500 text-white flex items-center mt-2 justify-between"
-                                                            : el[4] == 'П'
-                                                            ? "w-full rounded-xl  bg-blue-500 text-white mt-2 flex items-center justify-between"
-                                                            : "w-full rounded-xl  bg-red-500 text-white mt-2 flex items-center justify-between"
-                                                        }
+                                {el[4] == 'Щ'
+                                    ? "w-full rounded-xl  bg-green-500 text-white flex items-center mt-2 justify-between"
+                                    : el[4] == 'П'
+                                    ? "w-full rounded-xl  bg-blue-500 text-white mt-2 flex items-center justify-between"
+                                    : "w-full rounded-xl  bg-red-500 text-white mt-2 flex items-center justify-between"
+                                 }
                             
                             
                             >{el[4]}</TableCell>

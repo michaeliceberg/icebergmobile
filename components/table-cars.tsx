@@ -14,7 +14,7 @@ type Props = {
     carsObject: {
         id: number,
         carNum: string,
-        driver: string,
+        driver: string | null,
         type: string,
         odometer: string,
     }[]

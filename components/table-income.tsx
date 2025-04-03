@@ -83,7 +83,7 @@ import {
                             <TableRow key={index}>
                                 {/* <TableCell className="font-medium">{ReplaceDate(el[0])}</TableCell> */}
                                 <TableCell className="font-medium">{el[0]}</TableCell>
-                                <TableCell>{el[1]}</TableCell>
+                                <TableCell className="font-bold">{el[1]}</TableCell>
                                 <TableCell>{el[3]}</TableCell>
                                 <TableCell>{el[4]}</TableCell>
                                 <TableCell className="text-right">{el[5].slice(0,7)}</TableCell>

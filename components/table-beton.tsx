@@ -8,6 +8,7 @@ import {
   } from "@/components/ui/table"
 
 import { ReplaceBeton, ReplaceDate } from "./table-weights"
+import Image from "next/image";
 // import { RevalidateMeComp } from "./revalidateMeComp";
   
 
@@ -69,7 +70,11 @@ export const TableBeton = async ({
                                 {/* <TableHead className="text-left p-0.5">Из</TableHead> */}
                                 <TableHead>Контраг</TableHead>
                                 <TableHead>З</TableHead>
-                                <TableHead>🚚</TableHead>
+
+                                <TableHead>
+                                    <Image src='/ice_concretecar_icon.svg' alt='beton' height={30} width={30} />
+                                </TableHead>
+
                                 <TableHead className="text-right">Марка</TableHead>
                                 {/* <TableHead>Рецепт</TableHead> */}
                                 {/* <TableHead className="text-right">Авто №</TableHead> */}

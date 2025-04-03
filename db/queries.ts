@@ -25,6 +25,14 @@ export const getExpensesBid = cache(async () => {
 });
 
 
+export const getCars = cache(async () => {
+	const data = await db.query.cars.findMany();
+
+	return data;
+});
+
+
+
 
 
 // export const uploadExpensesBid = cache(async (betonToAddObject: typeof expensesBid.$inferSelect[]) => {

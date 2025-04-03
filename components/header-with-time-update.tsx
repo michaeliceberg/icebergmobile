@@ -56,7 +56,7 @@ export const HeaderWTU = ({
 						
 					</div> */}
 
-					<p className='text-sm'>
+					<p className=' pl-1 pr-1 font-bold '>
 
 						{pending ? 
 						
