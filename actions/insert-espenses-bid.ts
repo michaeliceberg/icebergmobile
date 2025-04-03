@@ -5,7 +5,7 @@ import {cache} from 'react'
 // import { revalidatePath } from 'next/cache';
 import { expensesBid } from '@/db/schema';
 import db from '@/db/drizzle';
-import { revalidatePath } from 'next/cache';
+// import { revalidatePath } from 'next/cache';
 // import { redirect } from 'next/navigation';
 
 export const uploadExpensesBid = cache(async (betonToAddObject: typeof expensesBid.$inferSelect[]) => {
@@ -29,12 +29,12 @@ export const uploadExpensesBid = cache(async (betonToAddObject: typeof expensesB
 
 	
 
-	revalidatePath('/')
-	revalidatePath('/asphalt')
-	revalidatePath('/beton')
-	revalidatePath('/income')
-	revalidatePath('/expenses')
-	revalidatePath('/weights')
+	// revalidatePath('/')
+	// revalidatePath('/asphalt')
+	// revalidatePath('/beton')
+	// revalidatePath('/income')
+	// revalidatePath('/expenses')
+	// revalidatePath('/weights')
 	// redirect('/beton');
  
 });

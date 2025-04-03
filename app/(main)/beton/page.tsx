@@ -1,5 +1,5 @@
-// import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
-// import { updateExpensesBid } from "@/actions/update-expenses-bid"
+import { uploadExpensesBid } from "@/actions/insert-espenses-bid"
+import { updateExpensesBid } from "@/actions/update-expenses-bid"
 import { getBetonData } from "@/app/_lib/readSheet"
 import { FeedWrapper } from "@/components/feed-wrapper"
 import { HeaderWTU } from "@/components/header-with-time-update"
@@ -113,9 +113,9 @@ const betonToUpdateObject = betonToUpdate.map(el => {
 })
 // ОБНОВЛЯЕМ ТОЛЬКО MASS DONE,   details не обновляем
 //
-// if (betonToUpdateObject.length > 0) {
-//     await updateExpensesBid(betonToUpdateObject)
-// }
+if (betonToUpdateObject.length > 0) {
+    await updateExpensesBid(betonToUpdateObject)
+}
 
 
 
@@ -187,9 +187,9 @@ const betonToAddObject = betonToAdd.map(el => {
     )
 })
 
-// if (betonToAddObject.length > 0) {
-//     await uploadExpensesBid(betonToAddObject)
-// }
+if (betonToAddObject.length > 0) {
+    await uploadExpensesBid(betonToAddObject)
+}
 
 
 

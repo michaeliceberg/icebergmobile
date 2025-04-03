@@ -3,10 +3,10 @@
 import {cache} from 'react'
 
 import { eq } from 'drizzle-orm';
-import { revalidatePath } from 'next/cache';
+// import { revalidatePath } from 'next/cache';
 import { expensesBid } from '@/db/schema';
 import db from '@/db/drizzle';
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 
 
 
@@ -24,13 +24,13 @@ export const updateExpensesBid = cache(async (betonToUpdateObject: typeof expens
 
 	console.log('updated Expenses Bid')
 
-	revalidatePath('/')
-	revalidatePath('/asphalt')
-	revalidatePath('/beton')
-	revalidatePath('/income')
-	revalidatePath('/expenses')
-	revalidatePath('/weights')
-	redirect('/beton');
+	// revalidatePath('/')
+	// revalidatePath('/asphalt')
+	// revalidatePath('/beton')
+	// revalidatePath('/income')
+	// revalidatePath('/expenses')
+	// revalidatePath('/weights')
+	// redirect('/beton');
 
 
 
