@@ -4,6 +4,7 @@ import { Button } from './ui/button'
 import { expensesBid } from '@/db/schema'
 import { updateExpensesBid } from '@/actions/update-expenses-bid'
 import { uploadExpensesBid } from '@/actions/insert-espenses-bid'
+import { revalidatePath } from 'next/cache'
 // import { revalidatePath } from 'next/cache'
 
 
@@ -23,8 +24,16 @@ export const UpdateButton =  ( {
 
 
     const handleClick = () => {
-        updateExpensesBid(betonToUpdateObject)
-        uploadExpensesBid(betonToAddObject)
+        // updateExpensesBid(betonToUpdateObject)
+        // uploadExpensesBid(betonToAddObject)
+
+
+        revalidatePath('/')
+        revalidatePath('/asphalt')
+        revalidatePath('/beton')
+        revalidatePath('/income')
+        revalidatePath('/expenses')
+        revalidatePath('/weights')
     }
     // if (betonToUpdateObject.length > 0) {
     //     await updateExpensesBid(betonToUpdateObject)
