@@ -117,7 +117,7 @@ export const TableWeights = ({
                             <TableCell>{el[3].slice(0,5)}</TableCell>
                             <TableCell className=
                                                             {el[4] == 'Щ'
-                                                            ? "w-full flex items-center mt-2 justify-between"
+                                                            ? "w-full rounded-xl  bg-green-500 text-white flex items-center mt-2 justify-between"
                                                             : el[4] == 'П'
                                                             ? "w-full rounded-xl  bg-blue-500 text-white mt-2 flex items-center justify-between"
                                                             : "w-full rounded-xl  bg-red-500 text-white mt-2 flex items-center justify-between"

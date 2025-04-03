@@ -6,7 +6,7 @@ import { HeaderWTU } from "@/components/header-with-time-update"
 import { StickyWrapper } from "@/components/sticky-wrapper"
 import { TableBeton } from "@/components/table-beton"
 import { ReplaceBeton } from "@/components/table-weights"
-import { UpdateButton } from "@/components/update-button"
+// import { UpdateButton } from "@/components/update-button"
 
 import { UserProgress } from "@/components/user-progress"
 // import { constBeton } from "@/constBeton"
@@ -36,21 +36,8 @@ if (!beton) {
 
 // ПОСЛЕДНЕЕ ОБНОВЛЕНИЕ
 const dateTimeUpdate:string = beton.slice(0, 4)[3][0].split(/(\s+)/)
-
-// const timeHourMinute = dateTimeUpdate.split(":");
-
-
-// const dateUpd = dateTimeUpdate [0]
-
-// det Hours Minutes
-//
-// const timeUpd = dateTimeUpdate[2].slice(0, -3)
-
-
 const dateUpd = dateTimeUpdate[4]
 const timeUpd = dateTimeUpdate[2]
-
-    
 
 
 
@@ -64,9 +51,6 @@ const timeUpd = dateTimeUpdate[2]
 // beton = betonSliсe
 
 beton = beton.slice(5,20).filter(el=>el[0] != '')
-// beton = betonSliсe
-
-// console.log(beton)
 
 
 
@@ -274,9 +258,9 @@ return(
             <TableBeton betonWithDetailsToRender={betonWithDetailsToRender} recipeData={recipeData}/>
 
 
-            <UpdateButton  
+            {/* <UpdateButton  
                 betonToUpdateObject = {betonToUpdateObject}  betonToAddObject = {betonToAddObject}
-                />
+            /> */}
         </FeedWrapper>
     </div>
     )

@@ -31,37 +31,8 @@ export const UpdateButton =  ( {
         updateExpensesBid(betonToUpdateObject)
         uploadExpensesBid(betonToAddObject)
 
-
-        // revalidatePath('/')
-        // revalidatePath('/asphalt')
-        // revalidatePath('/beton')
-        // revalidatePath('/income')
-        // revalidatePath('/expenses')
-        // revalidatePath('/weights')
     })
-    // if (betonToUpdateObject.length > 0) {
-    //     await updateExpensesBid(betonToUpdateObject)
-    // }
-
-    // if (betonToAddObject.length > 0) {
-    //     await uploadExpensesBid(betonToAddObject)
-    // }
-    // useEffect(()=>{
-
-        // if (betonToUpdateObject.length > 0) {
-        //     updateExpensesBid(betonToUpdateObject)
-
-        //     console.log('updateExpensesBid')
-        // }
-
-        // if (betonToAddObject.length > 0) {
-        //     uploadExpensesBid(betonToAddObject)
-        //     console.log('betonToAddObject')
-
-        // }
-        
-    // }, [])
-
+ 
     
 
     
