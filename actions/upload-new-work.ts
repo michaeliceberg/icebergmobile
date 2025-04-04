@@ -25,6 +25,7 @@ function getRandomInt(min: number, max: number) {
 			odometerWas: string,
 			workDone: string,
 			dateDone: Date
+			nextTO: string,
 		}
 ) => {
 	
@@ -34,18 +35,20 @@ function getRandomInt(min: number, max: number) {
 	await db.insert(works).values(
 		{
 			id: getRandomInt(10000, 9999999),
-			carId: detailsWork.carId,
-			imageUrl: detailsWork.imageUrl,
-			odometerWas: detailsWork.odometerWas,
-			workDone: detailsWork.workDone,
 			dateDone: detailsWork.dateDone,
+			workDone: detailsWork.workDone,
+			odometerWas: detailsWork.odometerWas,
+			imageUrl: detailsWork.imageUrl,
+			carId: detailsWork.carId,
+			nextTO: detailsWork.nextTO,
 		})
 	
 
 		// revalidatePath('/')
-		revalidatePath('/allwork')
-		revalidatePath('/warehouse')
-		redirect('/');
+		// revalidatePath('/allwork')
+		// revalidatePath('/warehouse')
+		revalidatePath('/cars')
+		redirect('/cars');
 		// revalidatePath(`/car/${carId}`)
  
 });

@@ -5,19 +5,124 @@ import { Header } from "@/components/header"
 import { TabCars } from "@/components/tab-cars"
 import { Zap } from "lucide-react"
 // import { getCarsData } from "@/app/_lib/readSheet"
-import { getCars } from "@/db/queries"
+import { getCars, getWorks } from "@/db/queries"
+// import { getCarsData } from "@/app/_lib/readSheet"
 // import { Uploader } from "@/components/uploader"
 
 
  const CarsPage = async () => {
 
-    // const cars2 = await getCarsData()
-    // console.log("weights: ", cars2)
-    // const dbCars = getCars()
-    const dbCars = await getCars()
+    // const googleCars = await getCarsData()
+
+    const dbCarsData = await getCars()
+    const dbWorksData = await getWorks()
+
+	const [
+		dbCars,
+		dbWorks,
+	] = await Promise.all([
+		dbCarsData,
+		dbWorksData,		
+	]);
 
 
-    // const cars = [
+
+
+    if (!dbCars) {
+        throw new Error('Нет машин!');
+    }
+
+
+   
+
+    const carsObject = dbCars.map(el => {
+        return (
+            {
+                id: el.id,
+                carNum: el.carNum,
+                driver: el.driver,
+                type: el.type,
+                odometer: el.odometer,
+                to_prev: el.TOprev,
+                to_next: el.TOnext,
+            }
+        )
+    })
+
+
+    
+
+
+
+    // СОРТИРОВКА ПО АЛФАВИТУ гос НОМЕРА
+    //
+    carsObject.sort(function(a, b) {
+        const textA = a.carNum.toUpperCase();
+        const textB = b.carNum.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
+    
+    const mixers = carsObject.filter(el => el.type.toUpperCase()== 'М')
+    const tonars = carsObject.filter(el => el.type.toUpperCase() == 'Т')
+    const samosv = carsObject.filter(el => el.type.toUpperCase() == 'С')
+    const errCars = carsObject.filter(el => el.odometer == '0' || el.to_next == '0' || el.to_prev == '0')
+
+
+    const FourTypes = [carsObject, samosv, tonars, mixers, errCars]
+
+    // console.log(mixers)
+
+
+    const NumCarsZeroOdometer = carsObject.filter(el => el.odometer == "0").length
+
+    // console.log(NumCarsZeroOdometer)
+
+
+    return(
+        <div className="flex flex-row-reverse gap-[48px] px-6">
+            <StickyWrapper>
+                <UserProgress />
+            </StickyWrapper>
+
+            <FeedWrapper>
+                <Header title='Автопарк'/>
+
+                {NumCarsZeroOdometer > 0 && 
+
+                    <div className="flex mt-10 gap-2 border-2 border-yellow-400 border-dashed justify-center p-4 w-full rounded-xl">
+                        <Zap className='h-5 w-5 stroke-2 text-yellow-400' />
+                        <p>
+                            {NumCarsZeroOdometer} авто с пробегом 0 км
+                        </p>
+                    </div>
+                }
+              
+
+                <div className="mt-5 mb-5">
+                    <TabCars FourTypes={FourTypes} dbWorks={dbWorks}/>
+                </div>
+
+            </FeedWrapper>
+        </div>
+    )
+ }
+
+ export default CarsPage
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const cars = [
 
     //     [ '1', 'а546мк750', 'Автаев Аюб Дзамирович', 'Т', '489 492' ],
     //     [ '2', 'с603хк190', '', 'Т', '332242' ],
@@ -151,101 +256,3 @@ import { getCars } from "@/db/queries"
     //     [ '100', 'х781вр790', '', 'М', '0' ]
 
     // ]
-
-
-
-    if (!dbCars) {
-        throw new Error('Нет машин!');
-    }
-
-
-    // const updateTime = weights[1][1]
-    // const sum = weights[2][6]
-
-    // const weightsSliсe = cars.slice(6,)
-
-
-    // const carsObject = cars.map(el => {
-    //     return (
-    //         {
-    //             id: +el[0],
-    //             carNum: el[1],
-    //             driver: el[2],
-    //             type: el[3],
-    //             odometer: el[4],
-    //         }
-    //     )
-    // })
-
-    const carsObject = dbCars.map(el => {
-        return (
-            {
-                id: el.id,
-                carNum: el.carNum,
-                driver: el.driver,
-                type: el.type,
-                odometer: el.odometer,
-                to_prev: el.TOprev,
-                to_next: el.TOnext,
-            }
-        )
-    })
-
-
-    
-
-
-
-    // СОРТИРОВКА ПО АЛФАВИТУ гос НОМЕРА
-    //
-    carsObject.sort(function(a, b) {
-        const textA = a.carNum.toUpperCase();
-        const textB = b.carNum.toUpperCase();
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
-
-    
-    const mixers = carsObject.filter(el => el.type.toUpperCase()== 'М')
-    const tonars = carsObject.filter(el => el.type.toUpperCase() == 'Т')
-    const samosv = carsObject.filter(el => el.type.toUpperCase() == 'С')
-
-    const FourTypes = [carsObject, mixers, tonars, samosv]
-
-    // console.log(mixers)
-
-
-    const NumCarsZeroOdometer = carsObject.filter(el => el.odometer == "0").length
-
-    // console.log(NumCarsZeroOdometer)
-
-
-    return(
-        <div className="flex flex-row-reverse gap-[48px] px-6">
-            <StickyWrapper>
-                <UserProgress />
-            </StickyWrapper>
-
-            <FeedWrapper>
-                <Header title='Автопарк'/>
-
-                {NumCarsZeroOdometer > 0 && 
-
-                    <div className="flex mt-10 gap-2 border-2 border-yellow-400 border-dashed justify-center p-4 w-full rounded-xl">
-                        <Zap className='h-5 w-5 stroke-2 text-yellow-400' />
-                        <p>
-                            {NumCarsZeroOdometer} авто с пробегом 0 км
-                        </p>
-                    </div>
-                }
-              
-
-                <div className="mt-5 mb-5">
-                    <TabCars FourTypes={FourTypes} />
-                </div>
-
-            </FeedWrapper>
-        </div>
-    )
- }
-
- export default CarsPage

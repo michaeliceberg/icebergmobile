@@ -8,6 +8,8 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { AddWork } from "./add-work"
+import { works } from "@/db/schema"
+import { LookWorks } from "./look-works"
  
 
 type Props = {
@@ -17,8 +19,10 @@ type Props = {
         driver: string | null,
         type: string,
         odometer: string,
-    }[]
+    }[],
+    dbWorks: typeof works.$inferInsert[],
 }
+
 
 
 export const ReplaceBid = (Bid: string) => {
@@ -46,7 +50,8 @@ export const ReplaceDate = (someDate: string) => {
 }
     
 export const TableCars = ({
-    carsObject
+    carsObject,
+    dbWorks,
 }: Props) => {
 
 
@@ -59,8 +64,9 @@ export const TableCars = ({
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[100px]">№</TableHead>
+                        <TableHead>Работы</TableHead>
                         <TableHead>Одометр</TableHead>
-                        <TableHead>ТО пред</TableHead>
+                        {/* <TableHead>ТО пред</TableHead> */}
                         <TableHead className="text-right">ТО след</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -76,8 +82,14 @@ export const TableCars = ({
 
                             <TableCell className="font-medium">
 
-                                <AddWork carNum={el.carNum} carId={el.id}/>
+                                <AddWork carNum={el.carNum}  odometer={el.odometer} carId={el.id} type={el.type}/>
                             
+                            </TableCell>
+
+
+                            <TableCell className="font-medium">
+                                <LookWorks works={dbWorks.filter(work => work.carId == el.id)}  carNum={el.carNum}  type={el.type}/>
+
                             </TableCell>
                             {/* <TableCell 
                             className=
@@ -91,7 +103,7 @@ export const TableCars = ({
                                 }
                             >{el.carNum}</TableCell> */}
                             <TableCell>{el.odometer}</TableCell>
-                            <TableCell>0</TableCell>
+                            {/* <TableCell>0</TableCell> */}
                             {/* <TableCell className=
                                                             {el[4] == 'Щ'
                                                             ? "w-full flex items-center mt-2 justify-between"
@@ -103,7 +115,7 @@ export const TableCars = ({
                             
                             >{el[4]}</TableCell> */}
                             {/* <TableCell>{el[5]}</TableCell> */}
-                            <TableCell className="text-right">0</TableCell>
+                            <TableCell className="text-right">489492</TableCell>
                         </TableRow>
                     ))}
                     

@@ -32,6 +32,12 @@ export const getCars = cache(async () => {
 });
 
 
+export const getWorks = cache(async () => {
+	const data = await db.query.works.findMany();
+
+	return data;
+});
+
 
 
 

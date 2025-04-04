@@ -33,6 +33,11 @@ const buttonVariants = cva(
 				leader: 'bg-transparent text-slate-500 border-transparent border-0 hover:bg-slate-100',
 				today: 'bg-green-500/10 text-green-600 border-green-300 hover:border-green-300 hover:border-2 transition-none',
 
+				sam: 'bg-red-500 text-primary-foreground hover:bg-red-500/90 border-red-600 border-b-4 active:border-b-0',
+				ton: 'bg-gray-500 text-primary-foreground hover:bg-gray-500/90 border-gray-600 border-b-4 active:border-b-0',
+				mix: 'bg-amber-500 text-primary-foreground hover:bg-amber-500/90 border-amber-600 border-b-4 active:border-b-0',
+
+
 			
 			},
 			size: {
