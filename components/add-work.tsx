@@ -16,6 +16,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState, useTransition } from "react"
+import { Checkbox } from "./ui/checkbox"
+// import { ArrowLeft } from "lucide-react"
 
 type Props = {
 //   allWorksInfo: {
@@ -76,10 +78,7 @@ export const AddWork = ({
 
   const HandleOnClick = () => {
 
-      // // console.log('pending')
 
-      // console.log(file)
-      // // console.log(picture)
       startTransition(()=> {
 
         uploadNewWork(detailsWork)
@@ -89,6 +88,28 @@ export const AddWork = ({
         setStatus('Работа добавлена! Закройте и обновите')
       })
     }
+
+
+    const [isChecked, setIsChecked] = useState(false)
+    const [isCheckedKmOd, setIsCheckedKmOd] = useState(false)
+    const [isCheckedKmTo, setIsCheckedKmTo] = useState(false)
+
+    // const [kmOd, setKmOd] = useState(odometer)
+    // const [kmTo, setKmTo] = useState(odometer)
+
+    const HandleCheckKmTO = () => {
+      setIsCheckedKmTo(!isCheckedKmTo)
+    }
+
+    const HandleCheckKmOd = () => {
+      setIsCheckedKmOd(!isCheckedKmOd)
+    }
+
+    const HandleCheck = () => {
+      setIsChecked(!isChecked)
+      console.log(isChecked)
+    }
+
 
 
   if (file) {
@@ -160,87 +181,143 @@ export const AddWork = ({
 
 
 
-          <div className="grid gap-4 py-4">
+          <div className="grid gap-4 py-4 mt-2">
 
-            <div key = {'Что делали'} className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Что делали
-                </Label>
-                <Input 
-                    id='workDone'
-                    value={detailsWork.workDone}
-                    className="col-span-3" 
-                    onChange={(e)=>{setDetailsWork({...detailsWork, workDone: (e.target.value)}) }}
-                />
+            <div className="w-full border-2 rounded-xl border-dashed border-gray-500 bg-gray-100">
+
+
+              <div className="m-4 pt-4">
+
+                <div key = {'Что делали'} className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="name" className="text-right">
+                      Что делали
+                    </Label>
+                    <Input 
+                        id='workDone'
+                        value={detailsWork.workDone}
+                        className="col-span-3" 
+                        onChange={(e)=>{setDetailsWork({...detailsWork, workDone: (e.target.value)}) }}
+                    />
+                </div>
+
+
+                <div key = {'Одометр'} className="grid grid-cols-4 items-center gap-4  py-4">
+                    <Label htmlFor="name" className="text-right">
+                      Одометр
+                    </Label>
+                    <Input 
+                        id='odometerWas'
+                        placeholder={odometer}
+                        value={detailsWork.odometerWas}
+                        onChange={(e)=>{setDetailsWork({...detailsWork, odometerWas: (e.target.value)}) }}
+                        className="col-span-2 w-full" 
+                    />
+
+
+                  <Checkbox 
+                    className="mt-1 h-8   w-full"
+                    onCheckedChange={HandleCheckKmOd}
+                  />
+                </div>
+
+
+               
+
+
+
+
+
+
+
+                <div key = {'фото'} className="grid grid-cols-4 items-center gap-4 mb-5">
+                    <Label htmlFor="name" className="text-right">
+                      фото
+                    </Label>
+                    <Input 
+                        id="photo" 
+                        type="file" 
+                        // value={detailsClient.telegram}
+                        className="col-span-3" 
+                        onChange={(e)=>{setFile(e.target.files?.[0])}}
+                        // onChange={(e)=>{handleNew(e)}}
+                    />
+                </div>
+
+              </div>
+
             </div>
 
 
-            <div key = {'Одометр'} className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Одометр
-                </Label>
-                <Input 
-                    id='odometerWas'
-                    placeholder={odometer}
-                    value={detailsWork.odometerWas}
-                    className="col-span-3" 
-                    onChange={(e)=>{setDetailsWork({...detailsWork, odometerWas: (e.target.value)}) }}
-                />
-            </div>
 
-
-
-            <div key = {'Это ТО?'} className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  СледущееТО
-                </Label>
+              <div key = {'Это ТО?'} className=
+                {!isChecked 
+                  ? "mt-4 w-full border-2 rounded-xl border-dashed border-gray-500 bg-gray-100"
+                  : "mt-4 w-full border-2 rounded-xl border-dashed border-gray-500 bg-green-200"
+                }
                 
-                <Input 
-                    id='nextTO'
-                    placeholder={`${+odometer + 15000}`}
-                    value={detailsWork.nextTO}
-                    className="col-span-3" 
-                    onChange={(e)=>{setDetailsWork({...detailsWork, nextTO: (e.target.value)}) }}
-                />
+                
+                >
+                <div className="m-4 pt-4">
+
+                <div className="justify-end flex gap-2 pb-2">
+                  <p className="text-lg pt-2">ТО</p>
+                  <Checkbox 
+                    
+                    className="mt-1 h-8 w-8"
+                    onCheckedChange={HandleCheck}
+                  />
+                </div>
+
+
+
+
+                <div className="grid grid-cols-4 items-center gap-4  py-4">
+                  <Label htmlFor="name" className=
+                    {!isChecked 
+                      ? "text-right pt-3 text-gray-400"
+                      : "text-right pt-3"
+                    }
+                    >
+                    <p className="text-sm">СледущееТО </p>
+                    <p className="text-xs">(+15 000) </p>
+                  </Label>
+                  
+                  <Input 
+                      disabled={!isChecked}
+                      id='nextTO'
+                      placeholder={`${+odometer + 15000}`}
+                      value={detailsWork.nextTO}
+                      className="col-span-2  w-full"
+                      
+
+                                            
+                      onChange={(e)=>{setDetailsWork({...detailsWork, nextTO: (e.target.value)}) }}
+                  />
+
+                    <Checkbox 
+                      disabled={!isChecked}
+                      className="mt-1 h-8 border-b-4 w-full"
+                      onCheckedChange={HandleCheckKmTO}
+                    />
+
+                </div>
+              </div>
+
             </div>
 
-            
-
-
-            {/* <div key = {'На будущее'} className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  На будущее
-                </Label>
-                <Input 
-                    id='telegram'
-                    value={detailsWork.}
-                    className="col-span-3" 
-                    onChange={(e)=>{setDetailsWork({...detailsWork, telegram: (e.target.value)}) }}
-                />
-            </div> */}
 
 
 
-            <div key = {'фото'} className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  фото
-                </Label>
-                <Input 
-                    id="photo" 
-                    type="file" 
-                    // value={detailsClient.telegram}
-                    className="col-span-3" 
-                    onChange={(e)=>{setFile(e.target.files?.[0])}}
-                    // onChange={(e)=>{handleNew(e)}}
-                />
-            </div>
+           
+
+
 
             
           </div>
         
         <DialogFooter>
           <Button 
-            className="w-full" 
+            className="w-full mt-4" 
             type="submit" 
             onClick={HandleOnClick}
           >
