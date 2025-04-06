@@ -100,6 +100,7 @@ export const works = pgTable('works', {
 	odometerWas: text('odometer_was'),
 	nextTO: text('next_to'),
 	imageUrl: text('image_url'),
+	isTO: text('is_to').notNull().default('0'),
 	carId: integer('car_id')
 		.references(() => cars.id, { onDelete: 'cascade' })
 		.notNull(),

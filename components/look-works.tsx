@@ -14,7 +14,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { works } from "@/db/schema"
-import { BookText, Calendar, Gauge, Wrench } from "lucide-react"
+import { BookText, CalendarDays, Wrench } from "lucide-react"
+import { format } from 'date-fns';
 
 type Props = {
   works: typeof works.$inferInsert[],
@@ -22,6 +23,16 @@ type Props = {
   type: string,
   
 }
+
+const DateFormat = (inDate: Date) => {
+  
+  const formattedDate: string = format(inDate, 'dd.MM.yyyy');
+  const formattedTime: string = format(inDate, 'hh:mm');
+
+  return `${formattedDate} ${formattedTime}`
+
+}
+
 
 export const LookWorks = ({
   works,
@@ -43,6 +54,7 @@ export const LookWorks = ({
  }
 
 
+ 
 
   return (
     <Dialog>
@@ -57,7 +69,23 @@ export const LookWorks = ({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>
-            <p className="mt-2 pb-2 flex justify-center content-center text-yellow-300 bg-gray-700 pt-2 rounded-xl">
+            <p className=
+            
+            // "mt-2 pb-2 flex justify-center content-center text-yellow-300 bg-gray-700 pt-2 rounded-xl">
+            
+            {type=='С' 
+            ? "mt-2 pb-2 flex justify-center content-center text-white bg-red-500/90 pt-2 rounded-xl"
+            
+            : type == 'М' 
+            ? "mt-2 pb-2 flex justify-center content-center text-white bg-amber-500/90 pt-2 rounded-xl"
+            
+            
+            : "mt-2 pb-2 flex justify-center content-center text-white bg-gray-500/90 pt-2 rounded-xl"
+            }
+            >
+
+            
+            
               Работы по {typeCar}у {spacedCarNum.toUpperCase()}
             </p>
           </DialogTitle>
@@ -71,24 +99,44 @@ export const LookWorks = ({
 
 
 
-          <div className="grid gap-4 py-4 ">
+        {/* <div className="grid gap-4 py-4 "> */}
+        <div className="">
 
             {works.map((work, index) => (
               
 
-              <div key={index*1092} className="border-2 border-dashed border-gray-600 rounded-xl p-4 ">
+              <div key={index*1092} className="border-2 border-dashed border-gray-600 rounded-xl p-4 mt-4">
 
-                <div key = {'dateDone'} className="flex pb-2 gap-2">
-                  <Calendar className="text-gray-600"/> 
-                  {work.dateDone != undefined ? JSON.stringify(work.dateDone) : ""}
+                
+                  <div className=" flex justify-center gap-4">
+
+                  {work.isTO == '1' && 
+                    <p className="pt-4 pb-4 bg-gray-600 p-2 text-white font-bold rounded-xl w-[60px] justify-center text-center">
+                      ТО
+                    </p>
+                  }
+
+                    <div>
+                      <p>одометр: {work.odometerWas} км</p>
+                      <p>след. то : {work.nextTO} км</p>
+
+                    </div>
+
+                  </div>
+                
+ 
+
+
+                <div key = {'dateDone'} className="flex pb-2 gap-2 mt-6">
+                  <CalendarDays className="text-gray-600"/> 
+
+                  {work.dateDone != undefined ? DateFormat(work.dateDone)  : ""}
+                
                 </div>
 
-                <div key = {'carId'} className="flex pb-2 gap-2">
-                  <Gauge className="text-gray-600"/> 
-                  {work.odometerWas} км
-                </div>
+                
 
-                <div key = {'workDone'} className="flex pb-2 gap-2">
+                <div key = {'workDone'} className="flex pb-2 gap-2 mt-1">
                   <Wrench className="text-gray-600"/> 
                   {work.workDone}             
                 </div>
