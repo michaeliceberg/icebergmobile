@@ -18,7 +18,9 @@ type Props = {
         type: string,
         odometer: string,
         to_prev: string,
-        next_to: string,      
+        next_to: string,  
+        model: string,
+    
     }[][],
     dbWorks: typeof works.$inferInsert[],
 }

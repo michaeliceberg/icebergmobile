@@ -84,6 +84,7 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
                 to_prev: el.TOprev,
                 // to_next: el.TOnext,
                 next_to: dbWorks.filter(work => work.carId == el.id)[0]?.nextTO || "0",
+                model: el.model,
             }
         )
     })

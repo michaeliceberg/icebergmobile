@@ -20,6 +20,7 @@ type Props = {
         type: string,
         odometer: string,
         next_to: string,
+        model: string,
     }[],
     dbWorks: typeof works.$inferInsert[],
 }
@@ -84,7 +85,14 @@ export const TableCars = ({
 
                             <TableCell className="font-medium">
 
-                                <AddWork next_to={el.next_to} carNum={el.carNum} odometer={el.odometer} carId={el.id} type={el.type}/>
+                                <AddWork 
+                                    next_to={el.next_to} 
+                                    carNum={el.carNum} 
+                                    odometer={el.odometer} 
+                                    carId={el.id} 
+                                    type={el.type}
+                                    model={el.model}
+                                />
                             
                             </TableCell>
 

@@ -85,6 +85,7 @@ export const cars = pgTable('cars', {
 	driver: text('driver'),
 	TOprev: text('to_prev').notNull().default('0'),
 	TOnext: text('to_next').notNull().default('0'),
+	model: text('model').notNull().default('model'),
 });
 
 

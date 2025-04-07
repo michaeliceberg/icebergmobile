@@ -22,6 +22,7 @@ type Props = {
   odometer: string,
   type: string,
   next_to: string,
+  model: string,
 }
 
 
@@ -31,6 +32,7 @@ export const AddWork = ({
   odometer, 
   type, 
   next_to, 
+  model,
 }:Props) => {
  
   const [pending, startTransition] = useTransition()
@@ -181,7 +183,7 @@ export const AddWork = ({
             }
 
             >
-              {typeCar} {spacedCarNum.toUpperCase()}
+              {typeCar} {model} {spacedCarNum.toUpperCase()}
             </p>
 
 
