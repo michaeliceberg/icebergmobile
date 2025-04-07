@@ -18,7 +18,7 @@ type Props = {
         type: string,
         odometer: string,
         to_prev: string,
-        to_next: string,      
+        next_to: string,      
     }[][],
     dbWorks: typeof works.$inferInsert[],
 }
@@ -31,7 +31,6 @@ export function TabCars({
 }: Props) {
   return (
     <Tabs defaultValue="all" className="pt-5">
-      {/* <TabsList className="grid w-full grid-cols-4"> */}
       <TabsList className="w-full flex justify-between">
         <TabsTrigger value="all">Все</TabsTrigger>
         <TabsTrigger value="sam">Самосвалы</TabsTrigger>
@@ -63,7 +62,7 @@ export function TabCars({
         </TabsContent>
 
         <TabsContent value="err">
-            <TableCars carsObject={FourTypes[3]} dbWorks={dbWorks}/>
+            <TableCars carsObject={FourTypes[4]} dbWorks={dbWorks}/>
         </TabsContent>
 
     </Tabs>

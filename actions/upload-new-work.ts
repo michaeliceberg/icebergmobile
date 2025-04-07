@@ -1,7 +1,8 @@
 'use server'
 
 import db from "@/db/drizzle";
-import { works } from "@/db/schema";
+import { cars, works } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cache } from "react";
@@ -26,6 +27,7 @@ function getRandomInt(min: number, max: number) {
 			workDone: string,
 			dateDone: Date
 			nextTO: string,
+			isTO: string
 		}
 ) => {
 	
@@ -41,7 +43,21 @@ function getRandomInt(min: number, max: number) {
 			imageUrl: detailsWork.imageUrl,
 			carId: detailsWork.carId,
 			nextTO: detailsWork.nextTO,
+			isTO: detailsWork.isTO,
 		})
+
+	
+	// if (detailsWork.isTO == '1') {
+	
+	// 	await db.update(cars).set({
+	// 		TOnext: works.nextTO,
+	// 	}).where (eq(cars.id, detailsWork.carId))
+	
+	// }
+
+
+	
+	
 	
 
 		// revalidatePath('/')

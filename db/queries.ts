@@ -33,7 +33,9 @@ export const getCars = cache(async () => {
 
 
 export const getWorks = cache(async () => {
-	const data = await db.query.works.findMany();
+	const data = await db.query.works.findMany(
+		{orderBy: (works, { desc })=> [desc(works.dateDone)]}
+	);
 
 	return data;
 });

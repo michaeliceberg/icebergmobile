@@ -19,6 +19,7 @@ type Props = {
         driver: string | null,
         type: string,
         odometer: string,
+        next_to: string,
     }[],
     dbWorks: typeof works.$inferInsert[],
 }
@@ -82,40 +83,70 @@ export const TableCars = ({
 
                             <TableCell className="font-medium">
 
-                                <AddWork carNum={el.carNum}  odometer={el.odometer} carId={el.id} type={el.type}/>
+                                <AddWork next_to={el.next_to} carNum={el.carNum} odometer={el.odometer} carId={el.id} type={el.type}/>
                             
                             </TableCell>
 
 
                             <TableCell className="font-medium">
-                                <LookWorks works={dbWorks.filter(work => work.carId == el.id)}  carNum={el.carNum}  type={el.type}/>
+                                <LookWorks 
+                                    works={dbWorks.filter(work => work.carId == el.id)}  
+                                    carNum={el.carNum}  
+                                    type={el.type}
+                                    next_to= {el.next_to}
+                                />
+                            </TableCell>
+                            
+                            <TableCell>
+                                {el.odometer}
+                            </TableCell>
+             
+                            <TableCell className="text-right pt-12">
+                                <p>
+                                    {dbWorks.filter(work => work.carId == el.id)[0]?.nextTO || "ТО не было"} 
+                                </p>
+
+
+                                {/* смотрим, NextTO нашли в списке Works?
+                                    Если нет - то красным КРЕСТИК
+                                    Если нашли - смотрим разницу ТО и одометр 
+                                    если < 5000 то Красным Иначе - зеленым
+                                */}
+
+                                {Number(dbWorks.filter(work => work.carId == el.id)[0]?.nextTO) 
+                                ? 
+                                <div>
+
+                                    {Number(dbWorks.filter(work => work.carId == el.id)[0]?.nextTO)  - +el.odometer < 5000 
+                                    
+                                    ?                                     
+                                    <p className="text-xs bg-red-200 p-2 rounded-sm w-[50px]">
+                                        {Number(dbWorks.filter(work => work.carId == el.id)[0]?.nextTO)  - +el.odometer} 
+                                    </p>
+                                
+                                    : 
+                                    <p className="text-xs bg-green-200 p-2 rounded-sm w-[50px]">
+                                        {Number(dbWorks.filter(work => work.carId == el.id)[0]?.nextTO)  - +el.odometer} 
+                                    </p>
+                                    } 
+                                </div>
+
+                                : 
+                                <div className="text-right justify-end text-red-500 content-end">
+                                    {/* <p className="text-xs bg-red-200 p-2 rounded-sm w-[50px]"> */}
+                                    {/* <Ban className='h-4 w-4 text-red-500 '/>  */}
+                                    {/* X */}
+                                    {/* </p> */}
+                                </div>
+
+                                }
+                               
+
 
                             </TableCell>
-                            {/* <TableCell 
-                            className=
-                                {el[6] == 'Приход'
-                                    ? "w-full font-bold flex items-center justify-between"
-                                    : el[6] == 'Инертные'
-                                    ? "w-full rounded-xl  bg-fuchsia-500 font-bold text-white mt-2 flex items-center justify-between"
-                                    : el[6] == 'Бетон'
-                                    ? "w-full rounded-xl  bg-orange-400 font-bold text-white mt-2 flex items-center justify-between"
-                                    : "w-full rounded-xl  bg-neutral-700 font-bold text-white mt-2 flex items-center justify-between"
-                                }
-                            >{el.carNum}</TableCell> */}
-                            <TableCell>{el.odometer}</TableCell>
-                            {/* <TableCell>0</TableCell> */}
-                            {/* <TableCell className=
-                                                            {el[4] == 'Щ'
-                                                            ? "w-full flex items-center mt-2 justify-between"
-                                                            : el[4] == 'П'
-                                                            ? "w-full rounded-xl  bg-blue-500 text-white mt-2 flex items-center justify-between"
-                                                            : "w-full rounded-xl  bg-red-500 text-white mt-2 flex items-center justify-between"
-                                                        }
-                            
-                            
-                            >{el[4]}</TableCell> */}
-                            {/* <TableCell>{el[5]}</TableCell> */}
-                            <TableCell className="text-right">489492</TableCell>
+
+
+
                         </TableRow>
                     ))}
                     

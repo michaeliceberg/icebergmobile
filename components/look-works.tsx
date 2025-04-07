@@ -14,13 +14,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { works } from "@/db/schema"
-import { BookText, CalendarDays, Wrench } from "lucide-react"
+import { BookText, CalendarDays } from "lucide-react"
 import { format } from 'date-fns';
+import { Separator } from "./ui/separator"
 
 type Props = {
   works: typeof works.$inferInsert[],
   carNum: string,
   type: string,
+  next_to: string,
   
 }
 
@@ -32,6 +34,33 @@ const DateFormat = (inDate: Date) => {
   return `${formattedDate} ${formattedTime}`
 
 }
+
+
+
+
+
+// const ThousandsKM = (kmIn: string | null | undefined) => {
+//   if ( kmIn != undefined && kmIn != null) {
+//     return `${kmIn.slice(0, 3)} ${kmIn.slice(-3, kmIn.length)}`
+
+//   }
+//   return kmIn
+// }   Math.trunc()
+
+
+
+const ThousandsKM = (kmIn: string | null | undefined) => {
+  if ( kmIn != undefined && kmIn != null) {
+    if (+kmIn < 1000) {
+      return (kmIn)
+    }
+    return `${Math.trunc(+kmIn/1000)} ${Math.trunc(+kmIn % 1000)}`
+    // return `${kmIn.slice(0, 3)} ${kmIn.slice(-3, kmIn.length)}`
+
+  }
+  return kmIn
+}
+
 
 
 export const LookWorks = ({
@@ -54,6 +83,8 @@ export const LookWorks = ({
  }
 
 
+
+
  
 
   return (
@@ -74,13 +105,13 @@ export const LookWorks = ({
             // "mt-2 pb-2 flex justify-center content-center text-yellow-300 bg-gray-700 pt-2 rounded-xl">
             
             {type=='С' 
-            ? "mt-2 pb-2 flex justify-center content-center text-white bg-red-500/90 pt-2 rounded-xl"
+            ? "mt-2 pb-2 flex justify-center content-center text-white bg-red-500/90 pt-2 rounded-sm"
             
             : type == 'М' 
-            ? "mt-2 pb-2 flex justify-center content-center text-white bg-amber-500/90 pt-2 rounded-xl"
+            ? "mt-2 pb-2 flex justify-center content-center text-white bg-amber-500/90 pt-2 rounded-sm"
             
             
-            : "mt-2 pb-2 flex justify-center content-center text-white bg-gray-500/90 pt-2 rounded-xl"
+            : "mt-2 pb-2 flex justify-center content-center text-white bg-gray-500/90 pt-2 rounded-sm"
             }
             >
 
@@ -104,61 +135,80 @@ export const LookWorks = ({
 
             {works.map((work, index) => (
               
+              <div key={index*1092} className="">
 
-              <div key={index*1092} className="border-2 border-dashed border-gray-600 rounded-xl p-4 mt-4">
+                <Separator className="mt-2 mb-2"/>
+                <div className="grid grid-cols-2 justify-center gap-4 pt-2">
 
-                
-                  <div className=" flex justify-center gap-4">
 
-                  {work.isTO == '1' && 
-                    <p className="pt-4 pb-4 bg-gray-600 p-2 text-white font-bold rounded-xl w-[60px] justify-center text-center">
-                      ТО
-                    </p>
-                  }
 
-                    <div>
-                      <p>одометр: {work.odometerWas} км</p>
-                      <p>след. то : {work.nextTO} км</p>
+                  <div>
+                    <div key = {'dateDone'} className="flex pb-2 gap-2 mt-2">
+                      <CalendarDays className="text-gray-600 "/> 
 
+                      {work.dateDone != undefined ? 
+                        <p className="bg-green-200 rounded-sm pl-2 pr-2"> {DateFormat(work.dateDone)} </p> 
+                        : ""}
+                    
                     </div>
 
+                  
+
+                    <div key = {'workDone'} className="flex pb-2 gap-2">
+                      {/* <Wrench className="text-gray-600"/>  */}
+
+
+                      {work.workDone}             
+                    </div>
+
+
                   </div>
+
+
+
+
+
+
+                  <div className="mt-2">
+
+
+                    <p>одометр: {ThousandsKM(work.odometerWas)} км</p>
+
+                    {work.isTO == '1' && 
+                      <p className="text-white justify-center mx-auto content-center text-center bg-gray-600 font-bold rounded-t-sm w-full">
+                        пройдено то
+                      </p>
+                    }
+
+                    <p className=
+                    {work.isTO == '1' ? "border-gray-600 border-2 pl-2 pr-2 rounded-b-sm font-bold": ""}
+                    >
+                      след. то : {ThousandsKM(work.nextTO)} км
+                    </p>
+
+                  </div>
+
+                
+                
+
+
+                
+
+
+
+                
+                
+                </div>
                 
  
 
 
-                <div key = {'dateDone'} className="flex pb-2 gap-2 mt-6">
-                  <CalendarDays className="text-gray-600"/> 
-
-                  {work.dateDone != undefined ? DateFormat(work.dateDone)  : ""}
                 
-                </div>
-
-                
-
-                <div key = {'workDone'} className="flex pb-2 gap-2 mt-1">
-                  <Wrench className="text-gray-600"/> 
-                  {work.workDone}             
-                </div>
 
               </div>
 
             ))}
 
-
-
-           
-
-
-
-            <div key = {'Это ТО?'} className="grid grid-cols-4 items-center gap-4">
-                
-            </div>
-
-            
-
-
-           
 
             
           </div>

@@ -1,8 +1,6 @@
 'use client'
 
 import { uploadNewWork } from "@/actions/upload-new-work"
-// import { uploadNewWork } from "@/actions/upload-new-work"
-// import { uploadNewClient } from "@/actions/upload-new-client"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -17,44 +15,29 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState, useTransition } from "react"
 import { Checkbox } from "./ui/checkbox"
-// import { ArrowLeft } from "lucide-react"
 
 type Props = {
-//   allWorksInfo: {
-//     id: number,
-//     carId: number,
-//     dateDone: Date,
-//     odometerWas: string,
-//     workDone: string,
-//     brand: string,
-//     model: string,
-//     vin: string,
-//     yearProduction: string,
-//     number: string,
-//     clientFullName: string,
-//     description: string,
-//     phone: string,
-//     imageUrl: string,
-// }[]
   carNum: string,
   carId: number,
   odometer: string,
   type: string,
+  next_to: string,
 }
 
+
 export const AddWork = ({
-  carNum, carId, odometer, type
+  carNum, 
+  carId, 
+  odometer, 
+  type, 
+  next_to, 
 }:Props) => {
  
-
-
   const [pending, startTransition] = useTransition()
   const [status, setStatus] = useState('Опишите проделанные работы:')
 
   console.log(pending)
-  // console.log(status)
-
-
+  
 
   const spacedCarNum = `${carNum[0] + " " + carNum.slice(1, 4) + " " + carNum.slice(4, 6) + " "+ carNum.slice(6)}`
  
@@ -78,14 +61,13 @@ export const AddWork = ({
 
   const HandleOnClick = () => {
 
-
       startTransition(()=> {
 
         uploadNewWork(detailsWork)
         // .then(()=>{
         //   setStatus('Работа добавлена! Закройте и обновите')
         // })
-        setStatus('Работа добавлена! Закройте и обновите')
+        setStatus('Работа добавлена! Окно можно закрыть.')
       })
     }
 
@@ -118,8 +100,10 @@ export const AddWork = ({
 
     const HandleCheck = () => {
 
+      setDetailsWork({...detailsWork, isTO:  isChecked==false ? '1' : '0' })
+
       setIsChecked(!isChecked)
-      console.log(isChecked)
+      
     }
 
 
@@ -155,9 +139,10 @@ export const AddWork = ({
       carId: carId,
       imageUrl: '',
       odometerWas: '',
-      nextTO: '',
+      nextTO: next_to,
       workDone: '',
-      dateDone: new Date()
+      dateDone: new Date(),
+      isTO: '0',
     }
   )
 
@@ -202,7 +187,7 @@ export const AddWork = ({
 
           </DialogTitle>
           
-          <DialogDescription className= {status == "Работа добавлена! Закройте и обновите" 
+          <DialogDescription className= {status == "Работа добавлена! Окно можно закрыть." 
             ? "text-center bg-rounded bg-green-500 text-white font-bold text-lg animate-bounce rounded-xl"
             : "text-center"
             }

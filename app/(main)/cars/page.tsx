@@ -1,18 +1,21 @@
 import { FeedWrapper } from "@/components/feed-wrapper"
 import { StickyWrapper } from "@/components/sticky-wrapper"
 import { UserProgress } from "@/components/user-progress"
-import { Header } from "@/components/header"
+// import { Header } from "@/components/header"
 import { TabCars } from "@/components/tab-cars"
-import { Zap } from "lucide-react"
+import { Siren } from "lucide-react"
 // import { getCarsData } from "@/app/_lib/readSheet"
 import { getCars, getWorks } from "@/db/queries"
+import { getCarsData } from "@/app/_lib/readSheet"
+import { HeaderWGarageU } from "@/components/header-with-garage-update"
+import { updateGarageOdometer } from "@/actions/update-garage-odometer"
 // import { getCarsData } from "@/app/_lib/readSheet"
 // import { Uploader } from "@/components/uploader"
 
 
  const CarsPage = async () => {
 
-    // const googleCars = await getCarsData()
+    const googleCars = await getCarsData()
 
     const dbCarsData = await getCars()
     const dbWorksData = await getWorks()
@@ -25,8 +28,39 @@ import { getCars, getWorks } from "@/db/queries"
 		dbWorksData,		
 	]);
 
+    // console.log(googleCars)
+
+    // const googleCars = [
+    //     [ '1', 'а546мк750', '', 'Т', '489492' ],
+    //     [ '2', 'с603хк190', '', 'Т', '332427' ],
+    //     [ '3', 'о009ух190', '', 'С', '0' ],
+    //     [ '4', 'а534нн', '', 'Т', '0' ],
+    //     [ '5', 'е602ст', '', 'С', '0' ],
+    //     [ '6', 'с285вн790', '', 'М', '0' ],
+    //     [ '7', 'м473ау790', '', 'С', '26268' ],
+    //     [ '8', 'м549ау790', '', 'М', '49600' ],
+    //     [ '9', 'е654ас790', '', 'Т', '47422' ],]
+
+    if (!googleCars) {
+        throw new Error('Нет машин из Google!');
+    }
 
 
+    const googleCarsObject = googleCars.map(el => {
+        return (
+            {
+                id: +el[0],
+                carNum: el[1],
+                driver: el[2],
+                odometer: el[4],
+            }
+        )
+    })
+
+
+    if (googleCarsObject.length > 0) {
+        await updateGarageOdometer(googleCarsObject)
+    }
 
     if (!dbCars) {
         throw new Error('Нет машин!');
@@ -44,10 +78,18 @@ import { getCars, getWorks } from "@/db/queries"
                 type: el.type,
                 odometer: el.odometer,
                 to_prev: el.TOprev,
-                to_next: el.TOnext,
+                // to_next: el.TOnext,
+                next_to: dbWorks.filter(work => work.carId == el.id)[0]?.nextTO || "7",
             }
         )
     })
+
+
+    // СОРТИРУЕМ ПО РАЗНИЦЕ      ПРОБЕГ - СЛЕД ТО
+    //
+    carsObject.sort((a,b) => (Math.abs(+a.next_to - +a.odometer) > Math.abs(+b.next_to - +b.odometer)) 
+    ? 1 
+    : ((Math.abs(+b.next_to - +b.odometer) > Math.abs(+a.next_to - +a.odometer)) ? -1 : 0))
 
 
     
@@ -56,20 +98,21 @@ import { getCars, getWorks } from "@/db/queries"
 
     // СОРТИРОВКА ПО АЛФАВИТУ гос НОМЕРА
     //
-    carsObject.sort(function(a, b) {
-        const textA = a.carNum.toUpperCase();
-        const textB = b.carNum.toUpperCase();
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
+    // carsObject.sort(function(a, b) {
+    //     const textA = a.carNum.toUpperCase();
+    //     const textB = b.carNum.toUpperCase();
+    //     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    // });
 
+    const all = carsObject.filter(el => el.odometer != '0')
     
-    const mixers = carsObject.filter(el => el.type.toUpperCase()== 'М')
-    const tonars = carsObject.filter(el => el.type.toUpperCase() == 'Т')
-    const samosv = carsObject.filter(el => el.type.toUpperCase() == 'С')
-    const errCars = carsObject.filter(el => el.odometer == '0' || el.to_next == '0' || el.to_prev == '0')
+    const mixers = carsObject.filter(el => el.type.toUpperCase()== 'М' && el.odometer != '0')
+    const tonars = carsObject.filter(el => el.type.toUpperCase() == 'Т' && el.odometer != '0')
+    const samosv = carsObject.filter(el => el.type.toUpperCase() == 'С' && el.odometer != '0')
+    const errCars = carsObject.filter(el => el.odometer == '0')
 
 
-    const FourTypes = [carsObject, samosv, tonars, mixers, errCars]
+    const FourTypes = [all, samosv, tonars, mixers, errCars]
 
     // console.log(mixers)
 
@@ -86,22 +129,23 @@ import { getCars, getWorks } from "@/db/queries"
             </StickyWrapper>
 
             <FeedWrapper>
-                <Header title='Автопарк'/>
+                <HeaderWGarageU title='Автопарк'/>
 
                 {NumCarsZeroOdometer > 0 && 
 
                     <div className="flex mt-10 gap-2 border-2 border-yellow-400 border-dashed justify-center p-4 w-full rounded-xl">
-                        <Zap className='h-5 w-5 stroke-2 text-yellow-400' />
-                        <p>
+                        <Siren  className='h-6 w-6 text-red-500'/>
+                        <p className="pt-1">
                             {NumCarsZeroOdometer} авто с пробегом 0 км
                         </p>
                     </div>
                 }
-              
+            
 
                 <div className="mt-5 mb-5">
                     <TabCars FourTypes={FourTypes} dbWorks={dbWorks}/>
                 </div>
+
 
             </FeedWrapper>
         </div>

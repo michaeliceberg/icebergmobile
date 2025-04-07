@@ -18,6 +18,7 @@ export const revalidateMe = cache(async () => {
 	revalidatePath('/income')
 	revalidatePath('/expenses')
 	revalidatePath('/weights')
+	revalidatePath('/cars')
 	// redirect('/beton');
  
 });
