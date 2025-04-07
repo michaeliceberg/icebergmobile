@@ -17,6 +17,11 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
 
     const googleCars = await getCarsData()
 
+    // Получаем Одометры Из Гугла
+    // Аплоадим их в Cars
+    // Грузим данные из Cars
+
+    // чтобы синхронизовать отдельная кнопка "обновить ОДОМЕТРЫ" которая только revalidate
 
 
 
@@ -47,7 +52,7 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
 
 
 
-    
+
     const dbCarsData = await getCars()
     const dbWorksData = await getWorks()
 
@@ -122,7 +127,8 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
 
 
     return(
-        <div className="flex flex-row-reverse gap-[48px] px-6">
+        // <div className="flex flex-row-reverse gap-[48px] px-6">
+        <div className="flex flex-row-reverse gap-[48px] pl-10">
             <StickyWrapper>
                 <UserProgress />
             </StickyWrapper>

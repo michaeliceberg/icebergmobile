@@ -151,12 +151,13 @@ export const AddWork = ({
       <DialogTrigger asChild>
 
       {/* <Button variant='default' className="flex m-auto mb-10  h-screen"> */}
-      <Button variant={buttonVariant} className="w-full">
+      <Button variant={buttonVariant} className="w-full" size='sm'>
           {carNum}
       </Button>
 
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
+      {/* <DialogContent className="w-full"> */}
         <DialogHeader>
           <DialogTitle>
 

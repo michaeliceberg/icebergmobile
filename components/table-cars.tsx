@@ -61,10 +61,11 @@ export const TableCars = ({
 
 
             <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
+                <TableCaption>Список машин.</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[100px]">№</TableHead>
+                    {/* <TableHead className="w-[10px]">№</TableHead> */}
+                        <TableHead>№ машины</TableHead>
                         <TableHead>Работы</TableHead>
                         <TableHead>Одометр</TableHead>
                         {/* <TableHead>ТО пред</TableHead> */}

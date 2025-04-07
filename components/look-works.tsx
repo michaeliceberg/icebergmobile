@@ -92,8 +92,8 @@ export const LookWorks = ({
       <DialogTrigger asChild>
 
       {/* <Button variant='default' className="flex m-auto mb-10  h-screen"> */}
-      <Button variant='default' className="">
-              <BookText />
+      <Button variant='default' className="" size='sm'>
+          <BookText />
       </Button>
 
       </DialogTrigger>
