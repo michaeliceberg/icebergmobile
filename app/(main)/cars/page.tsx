@@ -17,29 +17,10 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
 
     const googleCars = await getCarsData()
 
-    const dbCarsData = await getCars()
-    const dbWorksData = await getWorks()
 
-	const [
-		dbCars,
-		dbWorks,
-	] = await Promise.all([
-		dbCarsData,
-		dbWorksData,		
-	]);
 
-    // console.log(googleCars)
 
-    // const googleCars = [
-    //     [ '1', 'а546мк750', '', 'Т', '489492' ],
-    //     [ '2', 'с603хк190', '', 'Т', '332427' ],
-    //     [ '3', 'о009ух190', '', 'С', '0' ],
-    //     [ '4', 'а534нн', '', 'Т', '0' ],
-    //     [ '5', 'е602ст', '', 'С', '0' ],
-    //     [ '6', 'с285вн790', '', 'М', '0' ],
-    //     [ '7', 'м473ау790', '', 'С', '26268' ],
-    //     [ '8', 'м549ау790', '', 'М', '49600' ],
-    //     [ '9', 'е654ас790', '', 'Т', '47422' ],]
+
 
     if (!googleCars) {
         throw new Error('Нет машин из Google!');
@@ -52,7 +33,7 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
                 id: +el[0],
                 carNum: el[1],
                 driver: el[2],
-                odometer: el[4],
+                odometer: el[4].replace(/\s/g, ''),
             }
         )
     })
@@ -61,6 +42,24 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
     if (googleCarsObject.length > 0) {
         await updateGarageOdometer(googleCarsObject)
     }
+
+
+
+
+
+    
+    const dbCarsData = await getCars()
+    const dbWorksData = await getWorks()
+
+	const [
+		dbCars,
+		dbWorks,
+	] = await Promise.all([
+		dbCarsData,
+		dbWorksData,		
+	]);
+
+   
 
     if (!dbCars) {
         throw new Error('Нет машин!');
@@ -76,10 +75,10 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
                 carNum: el.carNum,
                 driver: el.driver,
                 type: el.type,
-                odometer: el.odometer,
+                odometer: el.odometer.replace(/\s/g, ''),
                 to_prev: el.TOprev,
                 // to_next: el.TOnext,
-                next_to: dbWorks.filter(work => work.carId == el.id)[0]?.nextTO || "7",
+                next_to: dbWorks.filter(work => work.carId == el.id)[0]?.nextTO || "0",
             }
         )
     })
