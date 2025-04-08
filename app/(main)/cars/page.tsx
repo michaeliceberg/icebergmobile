@@ -128,8 +128,8 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
 
 
     return(
-        // <div className="flex flex-row-reverse gap-[48px] px-6">
-        <div className="flex flex-row-reverse gap-[48px] pl-10">
+        <div className="flex flex-row-reverse gap-[48px] px-6">
+        {/* <div className="flex flex-row-reverse gap-[48px] pl-10"> */}
             <StickyWrapper>
                 <UserProgress />
             </StickyWrapper>
