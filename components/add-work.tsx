@@ -21,7 +21,7 @@ type Props = {
   carId: number,
   odometer: string,
   type: string,
-  next_to: string,
+  // next_to: string,
   model: string,
 }
 
@@ -31,14 +31,14 @@ export const AddWork = ({
   carId, 
   odometer, 
   type, 
-  next_to, 
+  // next_to, 
   model,
 }:Props) => {
  
   const [pending, startTransition] = useTransition()
   const [status, setStatus] = useState('Опишите проделанные работы:')
 
-  console.log(pending)
+  // console.log(pending)
   
 
   const spacedCarNum = `${carNum[0] + " " + carNum.slice(1, 4) + " " + carNum.slice(4, 6) + " "+ carNum.slice(6)}`
@@ -75,30 +75,32 @@ export const AddWork = ({
 
 
     const [isChecked, setIsChecked] = useState(false)
-    const [isCheckedKmOd, setIsCheckedKmOd] = useState(false)
-    const [isCheckedKmTo, setIsCheckedKmTo] = useState(false)
+    // const [isCheckedKmOd, setIsCheckedKmOd] = useState(false)
+    // const [isCheckedKmTo, setIsCheckedKmTo] = useState(false)
 
-    // const [kmOd, setKmOd] = useState(odometer)
-    // const [kmTo, setKmTo] = useState(odometer)
 
-    const HandleCheckKmTO = () => {
-      if (!isCheckedKmTo) {
-        setDetailsWork({...detailsWork, nextTO: `${+odometer + 15000}`}) 
-      } else {
-        setDetailsWork({...detailsWork, nextTO: ''}) 
-      }
 
-      setIsCheckedKmTo(!isCheckedKmTo)
-    }
+    // const HandleCheckKmTO = () => {
+    //   if (!isCheckedKmTo) {
+    //     setDetailsWork({...detailsWork, nextTO: `${+odometer + 15000}`}) 
+    //   } else {
+    //     setDetailsWork({...detailsWork, nextTO: ''}) 
+    //   }
 
-    const HandleCheckKmOd = () => {
-      if (!isCheckedKmOd) {
-        setDetailsWork({...detailsWork, odometerWas: odometer}) 
-      } else {
-        setDetailsWork({...detailsWork, odometerWas: ''}) 
-      }
-      setIsCheckedKmOd(!isCheckedKmOd)
-    }
+    //   setIsCheckedKmTo(!isCheckedKmTo)
+    // }
+
+    // const HandleCheckKmOd = () => {
+    //   if (!isCheckedKmOd) {
+    //     setDetailsWork({...detailsWork, odometerWas: odometer}) 
+    //   } else {
+    //     setDetailsWork({...detailsWork, odometerWas: ''}) 
+    //   }
+    //   setIsCheckedKmOd(!isCheckedKmOd)
+    // }
+
+
+
 
     const HandleCheck = () => {
 
@@ -140,8 +142,10 @@ export const AddWork = ({
       id: 1001,
       carId: carId,
       imageUrl: '',
-      odometerWas: '',
-      nextTO: next_to,
+      // odometerWas: '',
+      odometerWas: odometer,
+      // nextTO: next_to,
+      nextTO: `${+odometer + 15000}`,
       workDone: '',
       dateDone: new Date(),
       isTO: '0',
@@ -238,10 +242,10 @@ export const AddWork = ({
                   />
 
 
-                <Checkbox 
+                {/* <Checkbox 
                   className="mt-1 h-8 w-8"
                   onCheckedChange={HandleCheckKmOd}
-                />
+                /> */}
               </div>
 
 
@@ -311,6 +315,7 @@ export const AddWork = ({
                     disabled={!isChecked}
                     id='nextTO'
                     placeholder={`${+odometer + 15000}`}
+                    // placeholder="12"
                     value={detailsWork.nextTO}
                     className="col-span-2  w-full"
                     
@@ -319,11 +324,16 @@ export const AddWork = ({
                     onChange={(e)=>{setDetailsWork({...detailsWork, nextTO: (e.target.value)}) }}
                 />
 
-                <Checkbox 
+
+
+
+                
+
+                {/* <Checkbox 
                   disabled={!isChecked}
                   className="mt-1 h-8 w-8"
                   onCheckedChange={HandleCheckKmTO}
-                />
+                /> */}
               </div>
 
             </div>
