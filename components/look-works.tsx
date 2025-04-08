@@ -14,7 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { works } from "@/db/schema"
-import { BookText, CalendarDays } from "lucide-react"
+import { BookText, CalendarDays, MessageCircleX } from "lucide-react"
 import { format } from 'date-fns';
 import { Separator } from "./ui/separator"
 
@@ -94,6 +94,12 @@ export const LookWorks = ({
       {/* <Button variant='default' className="flex m-auto mb-10  h-screen"> */}
       <Button variant='default' className="" size='sm'>
           <BookText />
+            {works.length > 0 &&
+            <p className="pt-3 text-xs">
+              {works.length}
+            </p>
+            
+            }
       </Button>
 
       </DialogTrigger>
@@ -132,6 +138,17 @@ export const LookWorks = ({
 
         {/* <div className="grid gap-4 py-4 "> */}
         <div className="">
+            {works.length == 0 &&
+            
+              <div className="justify-center mx-auto content-center text-gray-500">
+                <MessageCircleX className="  h-16 w-16 justify-center mx-auto content-center" />
+                <p className="text-center font-bold"> Работ пока не было! </p>
+              </div>
+            }
+
+
+
+
 
             {works.map((work, index) => (
               

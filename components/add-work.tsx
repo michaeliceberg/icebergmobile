@@ -337,6 +337,8 @@ export const AddWork = ({
 
         <DialogFooter>
           <Button 
+            disabled={pending}
+            variant='super'
             className="w-full" 
             type="submit" 
             onClick={HandleOnClick}

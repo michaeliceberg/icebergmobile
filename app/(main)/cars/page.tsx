@@ -9,8 +9,7 @@ import { getCars, getWorks } from "@/db/queries"
 import { getCarsData } from "@/app/_lib/readSheet"
 import { HeaderWGarageU } from "@/components/header-with-garage-update"
 import { updateGarageOdometer } from "@/actions/update-garage-odometer"
-// import { getCarsData } from "@/app/_lib/readSheet"
-// import { Uploader } from "@/components/uploader"
+// import { TgSendMsgCom } from "@/components/tg-send-message-com"
 
 
  const CarsPage = async () => {
@@ -127,6 +126,10 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
     // console.log(NumCarsZeroOdometer)
 
 
+    const message = `🚨 ${errCars.length} машин с пробегом 0 км`
+    console.log(message)
+
+
     return(
         <div className="flex flex-row-reverse gap-[48px] px-6">
         {/* <div className="flex flex-row-reverse gap-[48px] pl-10"> */}
@@ -135,6 +138,13 @@ import { updateGarageOdometer } from "@/actions/update-garage-odometer"
             </StickyWrapper>
 
             <FeedWrapper>
+
+
+
+                {/* <TgSendMsgCom message={message} /> */}
+
+
+
                 <HeaderWGarageU title='Автопарк'/>
 
                 {NumCarsZeroOdometer > 0 && 
