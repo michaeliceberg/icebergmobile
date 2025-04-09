@@ -60,7 +60,7 @@ export const AddWork = ({
 
 
 
-  let srcCarModel:string = '/carModel/GRUNWALD.jpeg'
+  let srcCarModel:string = '/CarModel/GRUNWALD.jpeg'
 
   if (model == 'GRUNWALD') {
     srcCarModel = '/carModel/GRUNWALD.jpeg'
@@ -184,6 +184,8 @@ export const AddWork = ({
           {carNum}
       </Button>
 
+      
+
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
       {/* <DialogContent className="w-full"> */}
@@ -237,7 +239,7 @@ export const AddWork = ({
               src={srcCarModel}
               height={40}
               width={140}
-              alt='mascot'
+              alt={model}
               />
 
           </DialogDescription>
