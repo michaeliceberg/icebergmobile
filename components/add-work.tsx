@@ -60,18 +60,19 @@ export const AddWork = ({
 
 
 
+
   let srcCarModel:string = '/CarModel/GRUNWALD.jpeg'
 
   if (model == 'GRUNWALD') {
-    srcCarModel = '/carModel/GRUNWALD.jpeg'
+    srcCarModel = '/CarModel/GRUNWALD.jpeg'
   } else if (model == 'KAMAZ') {
-    srcCarModel = '/carModel/KAMAZ.jpeg'
+    srcCarModel = '/CarModel/KAMAZ.jpeg'
   } else if (model == 'MAN') {
-    srcCarModel = '/carModel/MAN.jpeg'
+    srcCarModel = '/CarModel/MAN.jpeg'
   } else if (model == 'SCANIA') {
-    srcCarModel = '/carModel/SCANIA.jpeg'
+    srcCarModel = '/CarModel/SCANIA.jpeg'
   } else if (model == 'SITRAK') {
-    srcCarModel = '/carModel/SITRAK.jpeg'
+    srcCarModel = '/CarModel/SITRAK.jpeg'
   }
 
 
