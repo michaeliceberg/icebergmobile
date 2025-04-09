@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState, useTransition } from "react"
 import { Checkbox } from "./ui/checkbox"
+import Image from "next/image"
 
 type Props = {
   carNum: string,
@@ -44,7 +45,7 @@ export const AddWork = ({
   const spacedCarNum = `${carNum[0] + " " + carNum.slice(1, 4) + " " + carNum.slice(4, 6) + " "+ carNum.slice(6)}`
  
   let typeCar:string = ''
-
+  
   let buttonVariant: "sam" | "ton" | "mix" = "sam"
   if (type == 'С') {
     typeCar = 'Самосвал'
@@ -56,6 +57,28 @@ export const AddWork = ({
     buttonVariant = 'ton'
     typeCar = 'Тонар'
   }
+
+
+
+  let srcCarModel:string = '/carModel/GRUNWALD.jpeg'
+
+  if (model == 'GRUNWALD') {
+    srcCarModel = '/carModel/GRUNWALD.jpeg'
+  } else if (model == 'KAMAZ') {
+    srcCarModel = '/carModel/KAMAZ.jpeg'
+  } else if (model == 'MAN') {
+    srcCarModel = '/carModel/MAN.jpeg'
+  } else if (model == 'SCANIA') {
+    srcCarModel = '/carModel/SCANIA.jpeg'
+  } else if (model == 'SITRAK') {
+    srcCarModel = '/carModel/SITRAK.jpeg'
+  }
+
+
+
+
+
+
   
   const [file, setFile] = useState<File>()
  
@@ -175,20 +198,29 @@ export const AddWork = ({
 
             {/* ? "mt-2 pb-2 flex justify-center content-center text-yellow-300 bg-gray-700 pt-2 rounded-xl" */}
 
-            <p className=
-            {type=='С' 
-            ? "mt-2 pb-2 flex justify-center content-center text-white bg-red-500/90 pt-2 rounded-xl"
-            
-            : type == 'М' 
-            ? "mt-2 pb-2 flex justify-center content-center text-white bg-amber-500/90 pt-2 rounded-xl"
-            
-            
-            : "mt-2 pb-2 flex justify-center content-center text-white bg-gray-500/90 pt-2 rounded-xl"
-            }
-
+            <div className=
+              {type=='С' 
+              ? "mt-2 pb-2 flex gap-4 justify-center content-center text-white bg-red-500/90 pt-2 rounded-xl"
+              
+              : type == 'М' 
+              ? "mt-2 pb-2 flex gap-4 justify-center content-center text-white bg-amber-500/90 pt-2 rounded-xl"
+              
+              
+              : "mt-2 pb-2 flex gap-4 justify-center content-center text-white bg-gray-500/90 pt-2 rounded-xl"
+              }
             >
-              {typeCar} {model} {spacedCarNum.toUpperCase()}
-            </p>
+
+
+              <p>
+                {typeCar} 
+              </p>
+
+              <p>
+                {spacedCarNum.toUpperCase()}
+              </p>
+
+              
+            </div>
 
 
 
@@ -200,7 +232,14 @@ export const AddWork = ({
             }
             >
 
-            {status}
+              <Image
+              className="mx-auto"
+              src={srcCarModel}
+              height={40}
+              width={140}
+              alt='mascot'
+              />
+
           </DialogDescription>
         </DialogHeader>
 
@@ -208,7 +247,7 @@ export const AddWork = ({
 
 
 
-        <div className="grid gap-4 py-4 mt-2">
+        <div className="grid gap-4 ">
 
           <div className="w-full border-2 rounded-xl border-dashed border-gray-500 bg-gray-100">
 
