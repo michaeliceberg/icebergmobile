@@ -66,11 +66,11 @@ export const TableCars = ({
                 <TableHeader>
                     <TableRow>
                     {/* <TableHead className="w-[10px]">№</TableHead> */}
-                        <TableHead>№ машины</TableHead>
-                        <TableHead>Работы</TableHead>
+                        <TableHead>ТО след</TableHead>
                         <TableHead>Одометр</TableHead>
+                        <TableHead>Работы</TableHead>
                         {/* <TableHead>ТО пред</TableHead> */}
-                        <TableHead className="text-right">ТО след</TableHead>
+                        <TableHead className="text-right">№ машины</TableHead>
                     </TableRow>
                 </TableHeader>
 
@@ -83,34 +83,9 @@ export const TableCars = ({
                     {carsObject.map((el, index) => (
                         <TableRow key={index}>
 
-                            <TableCell className="font-medium">
-
-                                <AddWork 
-                                    // next_to={el.next_to} 
-                                    carNum={el.carNum} 
-                                    odometer={el.odometer} 
-                                    carId={el.id} 
-                                    type={el.type}
-                                    model={el.model}
-                                />
-                            
-                            </TableCell>
 
 
-                            <TableCell className="font-medium">
-                                <LookWorks 
-                                    works={dbWorks.filter(work => work.carId == el.id)}  
-                                    carNum={el.carNum}  
-                                    type={el.type}
-                                    next_to= {el.next_to}
-                                />
-                            </TableCell>
-                            
-                            <TableCell>
-                                {el.odometer}
-                            </TableCell>
-             
-                            <TableCell className="text-right pt-12">
+<TableCell className="text-left pt-12">
                                 <p>
                                     {dbWorks.filter(work => work.carId == el.id)[0]?.nextTO || "ТО не было"} 
                                 </p>
@@ -152,6 +127,40 @@ export const TableCars = ({
                                
 
 
+                            </TableCell>
+
+                            
+                            <TableCell className="font-medium">
+                                {el.odometer}
+                            </TableCell>
+                            
+
+                            <TableCell className="font-medium">
+                                <LookWorks 
+                                    works={dbWorks.filter(work => work.carId == el.id)}  
+                                    carNum={el.carNum}  
+                                    type={el.type}
+                                    next_to= {el.next_to}
+                                />
+                            </TableCell>
+                            
+
+             
+                            
+
+
+
+                            <TableCell className="font-medium">
+
+                                <AddWork 
+                                    // next_to={el.next_to} 
+                                    carNum={el.carNum} 
+                                    odometer={el.odometer} 
+                                    carId={el.id} 
+                                    type={el.type}
+                                    model={el.model}
+                                />
+                            
                             </TableCell>
 
 
